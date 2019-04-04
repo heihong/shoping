@@ -1,10 +1,31 @@
-import { Component } from '@angular/core';
+import { Component , OnInit} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'bookApp';
+export class AppComponent implements OnInit{
+  constructor(private http: HttpClient){
+
+  }
+
+  ngOnInit(){
+   this.showConfig();
+  }
+
+  configUrl = 'http://henri-potier.xebia.fr/books';
+
+  getConfig() {
+    return this.http.get(this.configUrl);
+  }
+
+  showConfig() {
+    this.getConfig()
+      .subscribe((data) =>
+
+        this.books = data
+      );
+  }
 }
