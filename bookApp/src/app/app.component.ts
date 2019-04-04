@@ -1,13 +1,15 @@
 import { Component , OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BookService } from './app.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  providers: [ BookService ],
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient , private BookService: BookService){
 
   }
 
@@ -15,16 +17,11 @@ export class AppComponent implements OnInit{
    this.showConfig();
   }
 
-  configUrl = 'http://henri-potier.xebia.fr/books';
-
-  getConfig() {
-    return this.http.get(this.configUrl);
-  }
+  books : Object;
 
   showConfig() {
-    this.getConfig()
+    this.BookService.getBooks()
       .subscribe((data) =>
-
         this.books = data
       );
   }
