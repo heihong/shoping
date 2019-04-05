@@ -4,9 +4,9 @@ import { BookService } from './book.service';
 
 @Component({
   selector: 'app-books',
-  templateUrl: './books.component.html',
+  templateUrl: './book.component.html',
   providers: [ BookService ],
-  styleUrls: ['./books.component.css']
+  styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit{
   constructor(private http: HttpClient , private BookService: BookService){

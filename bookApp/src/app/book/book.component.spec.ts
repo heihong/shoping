@@ -1,9 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
-import {BookService} from "./book/book.service";
+import { AppComponent } from '../app.component';
+import {BookService} from "./book.service";
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import {Book} from "./models/book.model";
+import { Book } from "../models/book.model";
+import {BookComponent} from "./book.component";
 
 describe('AppComponent', () => {
 
@@ -17,7 +18,8 @@ describe('AppComponent', () => {
         HttpClientTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        BookComponent
       ],
       providers: [BookService]
     });
@@ -68,7 +70,7 @@ describe('AppComponent', () => {
             "Juste avant d'assister à la coupe du Monde ",
           ]
         }
-      ]
+      ];
     service.getBooks().subscribe(books=>{
       expect(books.length).toBe(4);
       expect(books).toEqual(bookMockData);
