@@ -74,7 +74,7 @@ describe('AppComponent', () => {
       expect(books).toEqual(bookMockData);
     })
 
-    const request  = httpMock.expectOne(`${service.booksUrl}`);
+    const request  = httpMock.expectOne(service.booksUrl);
       expect(request.request.method).toBe('GET');
 
       request.flush(bookMockData);

@@ -12,7 +12,7 @@ export class BookService {
   constructor(private http: HttpClient) { }
 
   getBooks() {
-    return this.http.get<Book[]>(`${this.booksUrl}`)
+    return this.http.get<Book[]>(this.booksUrl)
       // .pipe(
       //   catchError(this.handleError)
       // );
