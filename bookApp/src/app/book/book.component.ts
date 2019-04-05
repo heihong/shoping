@@ -1,15 +1,16 @@
 import { Component , OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BookService } from './book.service';
+import { CartService } from './../cart/cart.service';
 
 @Component({
   selector: 'app-books',
   templateUrl: './book.component.html',
-  providers: [ BookService ],
+  providers: [ BookService , CartService ],
   styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit{
-  constructor(private http: HttpClient , private BookService: BookService){
+  constructor(private http: HttpClient , private BookService: BookService, private CartService : CartService){
 
   }
 

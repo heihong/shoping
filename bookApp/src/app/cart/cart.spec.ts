@@ -7,13 +7,13 @@ import { AppComponent } from '../app.component';
 import {BookComponent} from "./../book/book.component";
 
 //service
-import {OfferService} from "./offer.service";
+import {CartService} from "./cart.service";
 
 
 describe('AppComponent', () => {
 
-  let service : OfferService;
   let httpMock : HttpTestingController;
+  let cartService : CartService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -25,26 +25,27 @@ describe('AppComponent', () => {
         AppComponent,
         BookComponent
       ],
-      providers: [OfferService]
+      providers: [CartService]
     });
 
-    service = TestBed.get(OfferService);
+    cartService = TestBed.get(CartService);
     httpMock = TestBed.get(HttpTestingController);
   });
 
-
-  it('should minus total with a value', ()  =>{
-    expect(60).toEqual(service.calculMinus(65, 5));
+  it('should add book to cart', ()  =>{
+    let book = {
+        "isbn": "c8fabf68-8374-48fe-a7ea-a00ccd07afff",
+        "title": "Henri Potier à l'école des sorciers",
+        "price": 35,
+        "cover": "http://henri-potier.xebia.fr/hp0.jpg",
+        "synopsis": [
+          "Après la mort de ses parents"
+        ]
+      };
+    cartService.addToCart(book);
+    expect(cartService.cart.length).toEqual(1);
+    expect(cartService.cart).toEqual([book]);
   });
-
-  it('should percentage total with a value', ()  =>{
-    expect(30).toEqual(service.calculPercentage(60, 50));
-  });
-
-  it('should slice total with a value', ()  =>{
-    expect(90).toEqual(service.calculSlide(100, 10, 100));
-  });
-
 
 
 });
