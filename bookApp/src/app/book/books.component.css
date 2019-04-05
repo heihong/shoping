@@ -1,0 +1,7 @@
+.books-page{
+  display: flex;
+}
+
+.card{
+  width: 18rem;
+}

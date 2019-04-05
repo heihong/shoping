@@ -9,7 +9,7 @@ import {BookComponent} from "./book/books.component";
 @NgModule({
   declarations: [
     AppComponent,
-    BookComponent
+    BookComponent,
   ],
   imports: [
     BrowserModule,
