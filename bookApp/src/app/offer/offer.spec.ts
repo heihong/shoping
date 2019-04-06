@@ -33,8 +33,26 @@ describe('AppComponent', () => {
   });
 
 
+  // offer 1
+
+  let offers1 = [
+    {
+      "type": "percentage",
+      "value": 4
+    },
+    {
+      "type": "minus",
+      "value": 15
+    },
+    {
+      "type": "slice",
+      "sliceValue": 100,
+      "value": 12
+    }
+  ]
+
   it('should minus total with a value', ()  =>{
-    expect(60).toEqual(service.calculMinus(65, 5));
+    expect(50).toEqual(service.calculMinus(65, 15));
   });
 
   it('should percentage total with a value', ()  =>{
@@ -42,7 +60,7 @@ describe('AppComponent', () => {
   });
 
   it('should slice total with a value', ()  =>{
-    expect(90).toEqual(service.calculSlide(100, 10, 100));
+    expect(65).toEqual(service.calculSlide(65, 12, 100));
   });
 
 

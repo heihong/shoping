@@ -40,27 +40,30 @@ export class CartComponent{
     return this.offers;
   }
 
-  getSup( bestOfferTotal, resultCalcul){
-    if(bestOfferTotal == -1){
-      return resultCalcul;
+  getInfIndex( bestOfferTotal, resultCalcul, index){
+    if(bestOfferTotal[0] == -1){
+      return [resultCalcul , index]
     }
-    let result : number;
-    result = bestOfferTotal > resultCalcul ? resultCalcul : bestOfferTotal;
-    return result;
+    if(bestOfferTotal[0] > resultCalcul){
+      return [resultCalcul , index];
+    }else {
+      return bestOfferTotal;
+    }
+
   }
 
 
   bestOffer(offers, books){
-    let bestOfferTotal : number = -1;
+    let bestOfferTotal = [-1, -1];
     for(let i = 0 ; i< offers.length ; i++){
       if(offers[i].type == 'percentage'){
-        bestOfferTotal = this.getSup(bestOfferTotal , this.offerService.calculPercentage(this.total(books), offers[i].value))
+        bestOfferTotal = this.getInfIndex(bestOfferTotal , this.offerService.calculPercentage(this.total(books), offers[i].value) ,i)
       }
       if(offers[i].type == 'minus'){
-        bestOfferTotal = this.getSup(bestOfferTotal , this.offerService.calculMinus(this.total(books), offers[i].value))
+        bestOfferTotal = this.getInfIndex(bestOfferTotal , this.offerService.calculMinus(this.total(books), offers[i].value) ,i)
       }
       if(offers[i].type == 'slice'){
-        bestOfferTotal = this.getSup(bestOfferTotal , this.offerService.calculSlide(this.total(books), offers[i].value, offers[i].sliceValue))
+        bestOfferTotal = this.getInfIndex(bestOfferTotal , this.offerService.calculSlide(this.total(books), offers[i].value, offers[i].sliceValue),i)
       }
     }
     return bestOfferTotal;

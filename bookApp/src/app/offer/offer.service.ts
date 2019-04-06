@@ -19,7 +19,7 @@ export class OfferService {
   }
 
   calculSlide(total, value, sliceValue){
-    let sliceNumber =  total/ sliceValue;
+    let sliceNumber =  Math.trunc(total/ sliceValue);
     return  total - value * sliceNumber;
   }
 }

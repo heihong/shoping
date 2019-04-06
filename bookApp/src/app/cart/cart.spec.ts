@@ -35,11 +35,11 @@ describe('AppComponent', () => {
       ],
       providers: [CartService, Globals]
     }).compileComponents()
-        cartService = TestBed.get(CartService);
-        httpMock = TestBed.get(HttpTestingController);
-        globals = TestBed.get(Globals)
-        cartComponent = TestBed.createComponent(CartComponent);
-        component = cartComponent.componentInstance;
+    cartService = TestBed.get(CartService);
+    httpMock = TestBed.get(HttpTestingController);
+    globals = TestBed.get(Globals)
+    cartComponent = TestBed.createComponent(CartComponent);
+    component = cartComponent.componentInstance;
   });
 
   let books = [
@@ -66,11 +66,9 @@ describe('AppComponent', () => {
     }
   ];
 
-  let offers = [
-      { "type": "percentage", "value": 5 },
-      { "type": "minus", "value": 15 },
-      { "type": "slice", "sliceValue": 100, "value": 12 }
-    ]
+
+
+
 
 
   it('should return total', ()  =>{
@@ -81,38 +79,66 @@ describe('AppComponent', () => {
     let listISbn = ['c8fabf68-8374-48fe-a7ea-a00ccd07afff', 'a460afed-e5e7-4e39-a39d-c885c05db861']
     expect(component.getlistIsbn(books)).toEqual(listISbn);
   })
-/*getSup( bestOfferTotal, resultCalcul,){
-    if(bestOfferTotal == -1){
-      return resultCalcul
+
+
+  it('should return resultCalcul', ()  =>{
+    let total = 30;
+    let resultCalcul = [30 , 0];
+    expect(component.getInfIndex([-1, -1], total, 0)).toEqual(resultCalcul);
+  })
+
+  it('should return resultCalcul', ()  =>{
+    let total = 30;
+    let bestOfferTotal = [40,2];
+    expect(component.getInfIndex(bestOfferTotal, total , 1)).toEqual([30,1]);
+  })
+
+  // offer 1
+
+  let offers1 = [
+    {
+      "type": "percentage",
+      "value": 4
+    },
+    {
+      "type": "minus",
+      "value": 15
+    },
+    {
+      "type": "slice",
+      "sliceValue": 100,
+      "value": 12
     }
-    let result : number;
-    result = bestOfferTotal > resultCalcul ? resultCalcul : bestOfferTotal;
-    return result;
-  }*/
+  ];
 
 
-  it('should return resultCalcul', ()  =>{
-    let resultCalcul = 30;
-    let bestOfferTotal = -1;
-    expect(component.getSup(bestOfferTotal, resultCalcul)).toEqual(resultCalcul);
-  })
-
-  it('should return resultCalcul', ()  =>{
-    let resultCalcul = 30;
-    let bestOfferTotal = 40;
-    expect(component.getSup(bestOfferTotal, resultCalcul)).toEqual(resultCalcul);
-  })
-
-  it('should return the best offer', ()  =>{
-   let result= 50;
-    expect(component.bestOffer(offers, books)).toEqual(result);
+  it('should return the best offer1', ()  =>{
+    let result= [50,1];
+    expect(component.bestOffer(offers1, books)).toEqual(result);
   })
 
 
 
+  let offers2 = [
+    {
+      "type": "percentage",
+      "value": 30
+    },
+    {
+      "type": "minus",
+      "value": 15
+    },
+    {
+      "type": "slice",
+      "sliceValue": 80,
+      "value": 14
+    }
+  ];
 
-
-
+  it('should return the best offer2', ()  =>{
+    let result  = [45.5 , 0]
+    expect(component.bestOffer(offers2, books)).toEqual(result);
+  })
 
 
 
