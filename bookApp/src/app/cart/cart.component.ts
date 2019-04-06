@@ -12,7 +12,6 @@ import {Globals} from "../globals/globals";
 export class CartComponent{
 
   private offers;
-  private bestOffer;
   constructor( private CartService : CartService, private globals: Globals, private offerService : OfferService){
   }
 
