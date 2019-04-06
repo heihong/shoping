@@ -7,7 +7,6 @@ import { AppComponent } from '../app.component';
 import {BookComponent} from "./../book/book.component";
 
 //service
-import {CartService} from "./cart.service";
 import {Globals} from "../globals/globals";
 import {CartComponent} from "./cart.component";
 
@@ -15,7 +14,6 @@ import {CartComponent} from "./cart.component";
 describe('AppComponent', () => {
 
   let httpMock : HttpTestingController;
-  let cartService : CartService;
   let bookComponent : ComponentFixture<BookComponent>;
   let globals : Globals;
   let cartComponent: ComponentFixture<CartComponent>;
@@ -33,9 +31,8 @@ describe('AppComponent', () => {
         BookComponent,
         CartComponent
       ],
-      providers: [CartService, Globals]
+      providers: [Globals]
     }).compileComponents()
-    cartService = TestBed.get(CartService);
     httpMock = TestBed.get(HttpTestingController);
     globals = TestBed.get(Globals)
     cartComponent = TestBed.createComponent(CartComponent);

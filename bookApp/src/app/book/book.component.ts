@@ -1,13 +1,12 @@
 import { Component , OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BookService } from './book.service';
-import { CartService } from './../cart/cart.service';
 import { Globals} from "../globals/globals";
 
 @Component({
   selector: 'app-books',
   templateUrl: './book.component.html',
-  providers: [ BookService , CartService ],
+  providers: [ BookService],
   styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit{

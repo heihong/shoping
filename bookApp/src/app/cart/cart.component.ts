@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CartService } from './../cart/cart.service';
 import { OfferService} from "../offer/offer.service";
 
 import {Globals} from "../globals/globals";
@@ -7,12 +6,12 @@ import {Globals} from "../globals/globals";
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  providers: [ CartService , OfferService],
+  providers: [OfferService],
 })
 export class CartComponent{
 
   private offers;
-  constructor( private CartService : CartService, private globals: Globals, private offerService : OfferService){
+  constructor(private globals: Globals, private offerService : OfferService){
   }
 
   total(books){
