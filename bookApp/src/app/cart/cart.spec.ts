@@ -81,8 +81,37 @@ describe('AppComponent', () => {
     let listISbn = ['c8fabf68-8374-48fe-a7ea-a00ccd07afff', 'a460afed-e5e7-4e39-a39d-c885c05db861']
     expect(component.getlistIsbn(books)).toEqual(listISbn);
   })
+/*getSup( bestOfferTotal, resultCalcul,){
+    if(bestOfferTotal == -1){
+      return resultCalcul
+    }
+    let result : number;
+    result = bestOfferTotal > resultCalcul ? resultCalcul : bestOfferTotal;
+    return result;
+  }*/
 
-  
+
+  it('should return resultCalcul', ()  =>{
+    let resultCalcul = 30;
+    let bestOfferTotal = -1;
+    expect(component.getSup(bestOfferTotal, resultCalcul)).toEqual(resultCalcul);
+  })
+
+  it('should return resultCalcul', ()  =>{
+    let resultCalcul = 30;
+    let bestOfferTotal = 40;
+    expect(component.getSup(bestOfferTotal, resultCalcul)).toEqual(resultCalcul);
+  })
+
+  it('should return the best offer', ()  =>{
+   let result= 50;
+    expect(component.bestOffer(offers, books)).toEqual(result);
+  })
+
+
+
+
+
 
 
 

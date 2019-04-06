@@ -12,6 +12,7 @@ import {Globals} from "../globals/globals";
 export class CartComponent{
 
   private offers;
+  private bestOffer;
   constructor( private CartService : CartService, private globals: Globals, private offerService : OfferService){
   }
 
@@ -39,6 +40,34 @@ export class CartComponent{
     })
     return this.offers;
   }
+
+  getSup( bestOfferTotal, resultCalcul){
+    if(bestOfferTotal == -1){
+      return resultCalcul;
+    }
+    let result : number;
+    result = bestOfferTotal > resultCalcul ? resultCalcul : bestOfferTotal;
+    return result;
+  }
+
+
+  bestOffer(offers, books){
+    let bestOfferTotal : number = -1;
+    for(let i = 0 ; i< offers.length ; i++){
+      if(offers[i].type == 'percentage'){
+        bestOfferTotal = this.getSup(bestOfferTotal , this.offerService.calculPercentage(this.total(books), offers[i].value))
+      }
+      if(offers[i].type == 'minus'){
+        bestOfferTotal = this.getSup(bestOfferTotal , this.offerService.calculMinus(this.total(books), offers[i].value))
+      }
+      if(offers[i].type == 'slice'){
+        bestOfferTotal = this.getSup(bestOfferTotal , this.offerService.calculSlide(this.total(books), offers[i].value, offers[i].sliceValue))
+      }
+    }
+    return bestOfferTotal;
+  }
+
+
 
 
 }

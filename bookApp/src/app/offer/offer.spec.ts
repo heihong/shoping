@@ -38,7 +38,7 @@ describe('AppComponent', () => {
   });
 
   it('should percentage total with a value', ()  =>{
-    expect(30).toEqual(service.calculPercentage(60, 50));
+    expect(61.75).toEqual(service.calculPercentage(65, 5));
   });
 
   it('should slice total with a value', ()  =>{

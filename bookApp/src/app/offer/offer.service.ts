@@ -15,7 +15,7 @@ export class OfferService {
   }
 
   calculPercentage(total, value){
-    return total * value/100;
+    return total - (total * value/100);
   }
 
   calculSlide(total, value, sliceValue){
