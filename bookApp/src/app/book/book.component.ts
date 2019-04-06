@@ -20,7 +20,7 @@ export class BookComponent implements OnInit{
   }
 
   books : Object;
-  cart = [];
+  cart =  this.globals.cart;
 
   showConfig() {
     this.BookService.getBooks()

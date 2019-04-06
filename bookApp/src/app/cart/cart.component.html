@@ -1,4 +1,4 @@
 <ul>
-  <pre>{{globals.cart | json}}</pre>
-  <span>test</span>
+  <li *ngFor="let product of globals.cart">{{product.price}}</li>
 </ul>
+<span>total {{total()}}</span>

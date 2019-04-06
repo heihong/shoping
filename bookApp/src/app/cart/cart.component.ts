@@ -13,5 +13,13 @@ export class CartComponent{
   constructor( private CartService : CartService, private globals: Globals){
   }
 
+  total(){
+    let total = 0 ;
+    for(let i = 0 ; i< this.globals.cart.length ; i++){
+      total = total + this.globals.cart[i].price;
+    }
+    return total;
+  }
+
 
 }
