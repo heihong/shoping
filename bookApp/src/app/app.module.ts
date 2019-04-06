@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import {BookComponent} from "./book/book.component";
 import {CartComponent} from "./cart/cart.component";
 
-
+import {Globals} from "./globals/globals";
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import {CartComponent} from "./cart/cart.component";
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [Globals],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
+import {Globals} from "../globals/globals";
 
 @Injectable()
 export class CartService {
 
   cart = [];
 
-  constructor() {}
-
-  addToCart(book){
-    this.cart.push(book);
-  }
+  constructor(private globals: Globals) {}
 
 }
