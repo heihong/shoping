@@ -1,4 +1,6 @@
 <ul>
   <li *ngFor="let product of globals.cart">{{product.price}}</li>
 </ul>
+<button (click)="bestOffer()"></button>
+<pre>{{offers | json}}</pre>
 <span>total {{total()}}</span>

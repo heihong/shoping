@@ -32,6 +32,5 @@ export class BookComponent implements OnInit{
   addToCart(book){
     this.cart.push(book);
     this.globals.cart = this.cart;
-    console.log(this.globals);
   }
 }
