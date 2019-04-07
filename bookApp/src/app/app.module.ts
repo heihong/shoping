@@ -9,6 +9,7 @@ import {CartComponent} from "./cart/cart.component";
 
 import {Globals} from "./globals/globals";
 import {BookComponent} from "./books/book/book.component";
+import {BookCartComponent} from "./cart/book/bookCart.component";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import {BookComponent} from "./books/book/book.component";
     AppComponent,
     BooksComponent,
     CartComponent,
-    BookComponent
+    BookComponent,
+    BookCartComponent
   ],
   imports: [
     BrowserModule,

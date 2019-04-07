@@ -3,21 +3,22 @@
 </div>
 
 <div *ngIf="globals.cart.length > 0">
-  <div class="row">
-    <div *ngFor="let product of globals.cart" class="padding20">
-      <app-book [book] = "product"></app-book>
+  <button (click)="clearCart()" class="btn btn-primary">clear cart</button>
+  <div class="row align">
+    <div *ngFor="let product of globals.cart, let i = index" [attr.data-index]="i" class="margin">
+      <app-book-cart [book]="product" [index] = "i" (uploaded) = "getOffers(getlistIsbn(globals.cart))"></app-book-cart>
     </div>
   </div>
   <div>
-    Total cart : {{globals.totalAmount}}
+    Total cart : {{total(this.globals.cart)}}
   </div>
 
-  <div>
-    Discount cart : {{globals.bestOffer.min}}
+  <div *ngIf="globals.offers">
+    Discount cart : {{bestOffer(globals.offers).min}}
   </div>
 
-  <div>
-    Type Discount {{globals.offers[globals.bestOffer.index].type}}
+  <div *ngIf="bestOffer(globals.offers).index !=-1">
+    Best offer of discount {{globals.offers[bestOffer(globals.offers).index].type}}
   </div>
 </div>
 

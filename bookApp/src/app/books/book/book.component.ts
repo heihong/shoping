@@ -16,10 +16,8 @@ export class BookComponent{
   constructor(private http: HttpClient , private BookService: BooksService, private globals : Globals){
 
   }
-  cart =  this.globals.cart;
 
   addToCart(book){
-    this.cart.push(book);
-    this.globals.cart = this.cart;
+    this.globals.cart.push(book);
   }
 }

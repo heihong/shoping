@@ -7,6 +7,7 @@ import {Globals} from "../globals/globals";
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   providers: [OfferService],
+  styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit{
 
@@ -15,7 +16,6 @@ export class CartComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.globals.totalAmount = this.total(this.globals.cart);
     if(this.globals.cart.length > 0){
       this.getOffers(this.getlistIsbn(this.globals.cart));
     }
@@ -42,9 +42,7 @@ export class CartComponent implements OnInit{
 
   getOffers(listIsbn){
     this.offerService.getOffer(listIsbn).subscribe((data)=>{
-      console.log(data['offers'])
       this.globals.offers= data['offers'];
-      this.globals.bestOffer = this.bestOffer(data['offers']);
     })
   }
 
@@ -63,25 +61,30 @@ export class CartComponent implements OnInit{
 
 
   bestOffer(offers){
+    console.log(offers)
     let bestOffer = {
       min: -1,
       index : -1
     };
-    for(let i = 0 ; i< offers.length ; i++){
-      if(offers[i].type == 'percentage'){
-        bestOffer = this.getOffer(bestOffer, this.offerService.calculPercentage(this.globals.totalAmount, offers[i].value) ,i)
-      }
-      if(offers[i].type == 'minus'){
-        bestOffer = this.getOffer(bestOffer, this.offerService.calculMinus(this.globals.totalAmount, offers[i].value) ,i)
-      }
-      if(offers[i].type == 'slice'){
-        bestOffer = this.getOffer(bestOffer, this.offerService.calculSlide(this.globals.totalAmount, offers[i].value, offers[i].sliceValue),i)
+    if(offers) {
+      for (let i = 0; i < offers.length; i++) {
+        if (offers[i].type == 'percentage') {
+          bestOffer = this.getOffer(bestOffer, this.offerService.calculPercentage(this.total(this.globals.cart), offers[i].value), i)
+        }
+        if (offers[i].type == 'minus') {
+          bestOffer = this.getOffer(bestOffer, this.offerService.calculMinus(this.total(this.globals.cart), offers[i].value), i)
+        }
+        if (offers[i].type == 'slice') {
+          bestOffer = this.getOffer(bestOffer, this.offerService.calculSlide(this.total(this.globals.cart), offers[i].value, offers[i].sliceValue), i)
+        }
       }
     }
     return bestOffer;
   }
 
 
-
+  clearCart(){
+    this.globals.cart.splice(0, this.globals.cart.length);
+  }
 
 }

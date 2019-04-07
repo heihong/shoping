@@ -5,6 +5,5 @@ export class Globals {
   cart: any = [];
   totalAmount : number;
   offers : any;
-  bestOffer = { min : -1,
-                index : 0};
+  bestOffer = { min : -1, index : -1};
 }
