@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { OfferService} from "../offer/offer.service";
+import { BookCartComponent } from "./book/bookCart.component"
 
 import {Globals} from "../globals/globals";
 
@@ -61,7 +62,6 @@ export class CartComponent implements OnInit{
 
 
   bestOffer(offers){
-    console.log(offers)
     let bestOffer = {
       min: -1,
       index : -1

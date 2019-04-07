@@ -1,6 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {CartComponent} from "./cart.component";
+import {FormsModule} from "@angular/forms";
 
 //component
 import { AppComponent } from '../app.component';
@@ -9,36 +11,45 @@ import { BookComponent } from "../books/book/book.component"
 
 //service
 import {Globals} from "../globals/globals";
-import {CartComponent} from "./cart.component";
+import {FilterPipe} from "./pipe/filter.pipe";
+import {BookCartComponent} from "./book/bookCart.component";
+
 
 
 describe('AppComponent', () => {
 
   let httpMock : HttpTestingController;
-  let booksComponent : ComponentFixture<BooksComponent>;
   let globals : Globals;
+  let bookComponent : ComponentFixture<BookComponent>
   let cartComponent: ComponentFixture<CartComponent>;
-  let component;
+  let cartComponentInstance;
+  let bookComponentInstance;
 
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        FormsModule
       ],
       declarations: [
         AppComponent,
         BooksComponent,
+        BookComponent,
         CartComponent,
-        BookComponent
+        FilterPipe,
+        BookCartComponent
+
       ],
       providers: [Globals]
     }).compileComponents()
     httpMock = TestBed.get(HttpTestingController);
     globals = TestBed.get(Globals)
+    bookComponent = TestBed.createComponent(BookComponent)
     cartComponent = TestBed.createComponent(CartComponent);
-    component = cartComponent.componentInstance;
+    bookComponentInstance = bookComponent.componentInstance;
+    cartComponentInstance = cartComponent.componentInstance;
   });
 
   let books = [
@@ -71,12 +82,12 @@ describe('AppComponent', () => {
 
 
   it('should return total', ()  =>{
-    expect(component.total(books)).toEqual(65);
+    expect(cartComponentInstance.total(books)).toEqual(65);
   })
 
   it('should a list of isbn', ()  =>{
     let listISbn = ['c8fabf68-8374-48fe-a7ea-a00ccd07afff', 'a460afed-e5e7-4e39-a39d-c885c05db861']
-    expect(component.getlistIsbn(books)).toEqual(listISbn);
+    expect(cartComponentInstance.getlistIsbn(books)).toEqual(listISbn);
   })
 
 
@@ -97,7 +108,7 @@ describe('AppComponent', () => {
 
     let indexCourant = 0;
 
-    expect(component.getOffer(bestOffer, resulCalcul, indexCourant)).toEqual(resultbestOffer);
+    expect(cartComponentInstance.getOffer(bestOffer, resulCalcul, indexCourant)).toEqual(resultbestOffer);
   })
 
   it('should return resultCalcul minus', ()  =>{
@@ -116,7 +127,7 @@ describe('AppComponent', () => {
 
     let indexCourant = 1;
 
-    expect(component.getOffer(bestOffer, resultCalcul , indexCourant)).toEqual(resultbestOffer);
+    expect(cartComponentInstance.getOffer(bestOffer, resultCalcul , indexCourant)).toEqual(resultbestOffer);
   })
 
   // offer 1
@@ -144,7 +155,8 @@ describe('AppComponent', () => {
       index : 1
     };
     globals.totalAmount = 65;
-    expect(component.bestOffer(offers1, books)).toEqual(resulBestOffer);
+    globals.cart = books;
+    expect(cartComponentInstance.bestOffer(offers1)).toEqual(resulBestOffer);
   })
 
 
@@ -171,7 +183,8 @@ describe('AppComponent', () => {
       index : 0
     };
     globals.totalAmount = 65;
-    expect(component.bestOffer(offers2, books)).toEqual(resulBestOffer);
+    globals.cart = books;
+    expect(cartComponentInstance.bestOffer(offers2)).toEqual(resulBestOffer);
   })
 
 
