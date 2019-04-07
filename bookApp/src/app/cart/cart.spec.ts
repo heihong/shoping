@@ -185,4 +185,40 @@ describe('CartComponent', () => {
     expect(globals.cart.length).toEqual(0);
   })
 
+  it('should return -15', ()  =>{
+    globals.offers = offers1;
+    globals.cart = books;
+    expect(cartComponentInstance.textMinus()).toEqual('-15');
+  })
+
+
+  let offers3 = [
+    {
+      "type": "percentage",
+      "value": 4
+    }
+  ];
+
+  it('should return -4%', ()  =>{
+    globals.offers = offers3;
+    globals.cart = books;
+    expect(cartComponentInstance.textPercentage()).toEqual('-4%');
+  })
+
+
+
+  let offers4 = [
+    {
+      "type": "slice",
+      "sliceValue": 80,
+      "value": 14
+    }
+  ];
+
+  it('should return -4%', ()  =>{
+    globals.offers = offers4;
+    globals.cart = books;
+    expect(cartComponentInstance.textSlice()).toEqual('-14 for each 80');
+  })
+
 });

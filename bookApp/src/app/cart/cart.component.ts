@@ -86,5 +86,17 @@ export class CartComponent implements OnInit{
     this.globals.cart.splice(0, this.globals.cart.length);
   }
 
+  textPercentage(){
+    return '-' + this.globals.offers[this.bestOffer(this.globals.offers).index].value + '%';
+  }
+
+  textMinus(){
+    return '-' + this.globals.offers[this.bestOffer(this.globals.offers).index].value;
+  }
+
+  textSlice(){
+    return '-' + this.globals.offers[this.bestOffer(this.globals.offers).index].value +' for each ' + this.globals.offers[this.bestOffer(this.globals.offers).index].sliceValue;
+  }
+
 
 }

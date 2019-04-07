@@ -3,7 +3,6 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {AppComponent} from "../../app.component";
 import {Globals} from "../../globals/globals";
 import {BookCartComponent} from "./bookCart.component";
-import {BookComponent} from "../../books/book/book.component";
 
 describe('BookCartComponent', () => {
   let globals : Globals;

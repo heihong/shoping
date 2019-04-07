@@ -4,22 +4,27 @@
 
 <div *ngIf="globals.cart.length > 0">
   <button (click)="clearCart()" class="btn btn-primary">clear cart</button>
+  <div>
+    Total : <span>{{bestOffer(globals.offers).min}}€</span> <span class="line margin-left">{{total(this.globals.cart)}}€</span>
+  </div>
+
+  <div *ngIf="bestOffer(globals.offers).index !=-1 && globals.offers[bestOffer(globals.offers).index].type == 'percentage' ">
+    Discount : {{textPercentage()}}
+  </div>
+
+  <div *ngIf="bestOffer(globals.offers).index !=-1 && globals.offers[bestOffer(globals.offers).index].type == 'minus' ">
+    Discount : {{textMinus()}}
+  </div>
+
+  <div *ngIf="bestOffer(globals.offers).index !=-1 && globals.offers[bestOffer(globals.offers).index].type == 'slice' ">
+    Discount : {{textSlice()}}
+  </div>
   <div class="row align">
     <div *ngFor="let product of globals.cart, let i = index" [attr.data-index]="i" class="margin">
       <app-book-cart [book]="product" [index] = "i" (uploaded) = "getOffers(getlistIsbn(globals.cart))"></app-book-cart>
     </div>
   </div>
-  <div>
-    Total cart : {{total(this.globals.cart)}}
-  </div>
 
-  <div *ngIf="globals.offers">
-    Discount cart : {{bestOffer(globals.offers).min}}
-  </div>
-
-  <div *ngIf="bestOffer(globals.offers).index !=-1">
-    Best offer of discount {{globals.offers[bestOffer(globals.offers).index].type}}
-  </div>
 </div>
 
 
