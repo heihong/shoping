@@ -1,14 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from '../app.component';
-import {BookService} from "./book.service";
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+
+//component
+import { AppComponent } from '../app.component';
+import { BooksComponent} from "./books.component";
+import { BookComponent } from "./book/book.component"
+
+//service
+import {BooksService} from "./books.service";
+
+//model
 import { Book } from "../models/book.model";
-import {BookComponent} from "./book.component";
+
 
 describe('AppComponent', () => {
 
-  let service : BookService;
+  let bookService : BooksService;
   let httpMock : HttpTestingController;
 
   beforeEach(() => {
@@ -19,12 +27,13 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
+        BooksComponent,
         BookComponent
       ],
-      providers: [BookService]
+      providers: [BooksService]
     });
 
-    service = TestBed.get(BookService);
+    bookService = TestBed.get(BooksService);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -71,12 +80,12 @@ describe('AppComponent', () => {
           ]
         }
       ];
-    service.getBooks().subscribe(books=>{
+    bookService.getBooks().subscribe(books=>{
       expect(books.length).toBe(4);
       expect(books).toEqual(bookMockData);
     })
 
-    const request  = httpMock.expectOne(service.booksUrl);
+    const request  = httpMock.expectOne(bookService.booksUrl);
       expect(request.request.method).toBe('GET');
 
       request.flush(bookMockData);
