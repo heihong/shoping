@@ -7,7 +7,7 @@ describe('FilterPipe', () => {
     pipe = new FilterPipe()
   })
 
-  it('should add to cart', ()  =>{
+  it('should return Henri Potier et la Chambre des secrets', ()  =>{
     let books = [
       {
         "isbn": "c8fabf68-8374-48fe-a7ea-a00ccd07afff",

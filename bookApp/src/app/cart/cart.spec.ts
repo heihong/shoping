@@ -76,13 +76,13 @@ describe('CartComponent', () => {
     expect(cartComponentInstance.total(books)).toEqual(65);
   })
 
-  it('should a list of isbn', ()  =>{
+  it('should return a list of isbn', ()  =>{
     let listISbn = ['c8fabf68-8374-48fe-a7ea-a00ccd07afff', 'a460afed-e5e7-4e39-a39d-c885c05db861']
     expect(cartComponentInstance.getlistIsbn(books)).toEqual(listISbn);
   })
 
 
-  it('should call getOffer and return resultCalcul percentage', ()  =>{
+  it('should return the bestOffer', ()  =>{
 
     // calculation percentage 65 * 5%
     let resulCalcul = 61.75;
@@ -99,11 +99,11 @@ describe('CartComponent', () => {
 
     let indexCourant = 0;
 
-    expect(cartComponentInstance.getOffer(bestOffer, resulCalcul, indexCourant)).toEqual(resultbestOffer);
+    expect(cartComponentInstance.getBestOffer(bestOffer, resulCalcul, indexCourant)).toEqual(resultbestOffer);
   })
 
-  it('should call getOffer return resultCalcul minus', ()  =>{
-    // calculation minus 65 * 15
+  it('should return the bestOffer', ()  =>{
+    // calculation minus 65 - 15
     let resultCalcul = 50;
 
     let bestOffer = {
@@ -118,7 +118,7 @@ describe('CartComponent', () => {
 
     let indexCourant = 1;
 
-    expect(cartComponentInstance.getOffer(bestOffer, resultCalcul , indexCourant)).toEqual(resultbestOffer);
+    expect(cartComponentInstance.getBestOffer(bestOffer, resultCalcul , indexCourant)).toEqual(resultbestOffer);
   })
 
   // offer 1
@@ -140,14 +140,14 @@ describe('CartComponent', () => {
   ];
 
 
-  it('should return the best offer1', ()  =>{
+  it('should return the best offer for the cart with offer1', ()  =>{
     let resulBestOffer = {
       min : 50,
       index : 1
     };
     globals.totalAmount = 65;
     globals.cart = books;
-    expect(cartComponentInstance.bestOffer(offers1)).toEqual(resulBestOffer);
+    expect(cartComponentInstance.bestOfferCart(offers1)).toEqual(resulBestOffer);
   })
 
 
@@ -168,14 +168,14 @@ describe('CartComponent', () => {
     }
   ];
 
-  it('should return the best offer2', ()  =>{
+  it('should return the best offer for the cart with offer2', ()  =>{
     let resulBestOffer = {
       min : 45.5,
       index : 0
     };
     globals.totalAmount = 65;
     globals.cart = books;
-    expect(cartComponentInstance.bestOffer(offers2)).toEqual(resulBestOffer);
+    expect(cartComponentInstance.bestOfferCart(offers2)).toEqual(resulBestOffer);
   })
 
 
@@ -215,7 +215,7 @@ describe('CartComponent', () => {
     }
   ];
 
-  it('should return -4%', ()  =>{
+  it('should return -14 for each 80', ()  =>{
     globals.offers = offers4;
     globals.cart = books;
     expect(cartComponentInstance.textSlice()).toEqual('-14 for each 80');

@@ -14,7 +14,7 @@ import {FilterPipe} from "../cart/pipe/filter.pipe";
 
 
 
-describe('AppComponent', () => {
+describe('OfferService', () => {
 
   let service : OfferService;
   let httpMock : HttpTestingController;
@@ -58,15 +58,15 @@ describe('AppComponent', () => {
     }
   ]
 
-  it('should minus total with a value', ()  =>{
+  it('should subtract total with a value', ()  =>{
     expect(50).toEqual(service.calculMinus(65, 15));
   });
 
-  it('should percentage total with a value', ()  =>{
+  it(`should return the result from total's percentage`, ()  =>{
     expect(61.75).toEqual(service.calculPercentage(65, 5));
   });
 
-  it('should slice total with a value', ()  =>{
+  it('should subtract total for each sliceValue', ()  =>{
     expect(65).toEqual(service.calculSlide(65, 12, 100));
   });
 

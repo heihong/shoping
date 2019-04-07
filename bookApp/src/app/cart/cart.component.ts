@@ -46,7 +46,7 @@ export class CartComponent implements OnInit{
     })
   }
 
-  getOffer(bestOffer, resultCalcul, index){
+  getBestOffer(bestOffer, resultCalcul, index){
     if(bestOffer.min == -1){
       bestOffer.min = resultCalcul;
       bestOffer.index = index;
@@ -60,7 +60,7 @@ export class CartComponent implements OnInit{
   }
 
 
-  bestOffer(offers){
+  bestOfferCart(offers){
     let bestOffer = {
       min: -1,
       index : -1
@@ -68,13 +68,13 @@ export class CartComponent implements OnInit{
     if(offers) {
       for (let i = 0; i < offers.length; i++) {
         if (offers[i].type == 'percentage') {
-          bestOffer = this.getOffer(bestOffer, this.offerService.calculPercentage(this.total(this.globals.cart), offers[i].value), i)
+          bestOffer = this.getBestOffer(bestOffer, this.offerService.calculPercentage(this.total(this.globals.cart), offers[i].value), i)
         }
         if (offers[i].type == 'minus') {
-          bestOffer = this.getOffer(bestOffer, this.offerService.calculMinus(this.total(this.globals.cart), offers[i].value), i)
+          bestOffer = this.getBestOffer(bestOffer, this.offerService.calculMinus(this.total(this.globals.cart), offers[i].value), i)
         }
         if (offers[i].type == 'slice') {
-          bestOffer = this.getOffer(bestOffer, this.offerService.calculSlide(this.total(this.globals.cart), offers[i].value, offers[i].sliceValue), i)
+          bestOffer = this.getBestOffer(bestOffer, this.offerService.calculSlide(this.total(this.globals.cart), offers[i].value, offers[i].sliceValue), i)
         }
       }
     }
@@ -87,15 +87,15 @@ export class CartComponent implements OnInit{
   }
 
   textPercentage(){
-    return '-' + this.globals.offers[this.bestOffer(this.globals.offers).index].value + '%';
+    return '-' + this.globals.offers[this.bestOfferCart(this.globals.offers).index].value + '%';
   }
 
   textMinus(){
-    return '-' + this.globals.offers[this.bestOffer(this.globals.offers).index].value;
+    return '-' + this.globals.offers[this.bestOfferCart(this.globals.offers).index].value;
   }
 
   textSlice(){
-    return '-' + this.globals.offers[this.bestOffer(this.globals.offers).index].value +' for each ' + this.globals.offers[this.bestOffer(this.globals.offers).index].sliceValue;
+    return '-' + this.globals.offers[this.bestOfferCart(this.globals.offers).index].value +' for each ' + this.globals.offers[this.bestOfferCart(this.globals.offers).index].sliceValue;
   }
 
 

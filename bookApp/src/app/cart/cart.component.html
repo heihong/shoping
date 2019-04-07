@@ -5,18 +5,18 @@
 <div *ngIf="globals.cart.length > 0">
   <button (click)="clearCart()" class="btn btn-primary">clear cart</button>
   <div>
-    Total : <span>{{bestOffer(globals.offers).min}}€</span> <span class="line margin-left">{{total(this.globals.cart)}}€</span>
+    Total : <span>{{bestOfferCart(globals.offers).min}}€</span> <span class="line margin-left">{{total(this.globals.cart)}}€</span>
   </div>
 
-  <div *ngIf="bestOffer(globals.offers).index !=-1 && globals.offers[bestOffer(globals.offers).index].type == 'percentage' ">
+  <div *ngIf="bestOfferCart(globals.offers).index !=-1 && globals.offers[bestOfferCart(globals.offers).index].type == 'percentage' ">
     Discount : {{textPercentage()}}
   </div>
 
-  <div *ngIf="bestOffer(globals.offers).index !=-1 && globals.offers[bestOffer(globals.offers).index].type == 'minus' ">
+  <div *ngIf="bestOfferCart(globals.offers).index !=-1 && globals.offers[bestOfferCart(globals.offers).index].type == 'minus' ">
     Discount : {{textMinus()}}
   </div>
 
-  <div *ngIf="bestOffer(globals.offers).index !=-1 && globals.offers[bestOffer(globals.offers).index].type == 'slice' ">
+  <div *ngIf="bestOfferCart(globals.offers).index !=-1 && globals.offers[bestOfferCart(globals.offers).index].type == 'slice' ">
     Discount : {{textSlice()}}
   </div>
   <div class="row align">

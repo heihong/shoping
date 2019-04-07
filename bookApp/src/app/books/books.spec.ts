@@ -21,7 +21,7 @@ import {FilterPipe} from "../cart/pipe/filter.pipe";
 
 describe('BooksService', () => {
 
-  let bookService : BooksService;
+  let booksService : BooksService;
   let httpMock : HttpTestingController;
 
   beforeEach(() => {
@@ -40,7 +40,7 @@ describe('BooksService', () => {
       providers: [BooksService]
     });
 
-    bookService = TestBed.get(BooksService);
+    booksService = TestBed.get(BooksService);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -88,12 +88,12 @@ describe('BooksService', () => {
 
   it('should retrieve books from the API via GET', ()  =>{
 
-    bookService.getBooks().subscribe(books=>{
+    booksService.getBooks().subscribe(books=>{
       expect(books.length).toBe(4);
       expect(books).toEqual(bookMockData);
     })
 
-    const request  = httpMock.expectOne(bookService.booksUrl);
+    const request  = httpMock.expectOne(booksService.booksUrl);
       expect(request.request.method).toBe('GET');
 
       request.flush(bookMockData);

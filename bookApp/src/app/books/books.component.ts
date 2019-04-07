@@ -9,7 +9,7 @@ import { BooksService } from './books.service';
   styleUrls: ['./books.component.css']
 })
 export class BooksComponent implements OnInit{
-  constructor(private http: HttpClient , private BookService: BooksService){
+  constructor(private http: HttpClient , private booksService: BooksService){
 
   }
 
@@ -20,7 +20,7 @@ export class BooksComponent implements OnInit{
   books : Object;
 
   showConfig() {
-    this.BookService.getBooks()
+    this.booksService.getBooks()
       .subscribe((data) =>
         this.books = data
       );

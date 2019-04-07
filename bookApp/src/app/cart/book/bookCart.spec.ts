@@ -25,7 +25,7 @@ describe('BookCartComponent', () => {
     bookCartComponent = TestBed.createComponent(BookCartComponent);
     bookCartComponentInstance = bookCartComponent.componentInstance;
   })
-  it('should add to cart', ()  =>{
+  it('should remove a book to cart', ()  =>{
     globals.cart = [
       {
         "isbn": "c8fabf68-8374-48fe-a7ea-a00ccd07afff",
