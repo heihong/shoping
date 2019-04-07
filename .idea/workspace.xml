@@ -48,7 +48,7 @@
           <entry key="css" value="60" />
           <entry key="html" value="880" />
           <entry key="js" value="17" />
-          <entry key="md" value="103" />
+          <entry key="md" value="105" />
           <entry key="ts" value="2019" />
         </counts>
       </usages-collector>
@@ -57,7 +57,7 @@
           <entry key="CSS" value="60" />
           <entry key="HTML" value="880" />
           <entry key="JavaScript" value="17" />
-          <entry key="Markdown" value="103" />
+          <entry key="Markdown" value="105" />
           <entry key="TypeScript" value="2019" />
         </counts>
       </usages-collector>
@@ -96,7 +96,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="136">
-                <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
+                <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
               </first_editor>
               <second_editor />
             </state>
@@ -1525,7 +1525,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554659073642" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554659114677" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../cycle-up-project" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -1597,12 +1597,12 @@
       <option name="presentableId" value="Default" />
       <updated>1554394618145</updated>
       <workItem from="1554394619685" duration="16000" />
-      <workItem from="1554621785042" duration="33702000" />
+      <workItem from="1554621785042" duration="33743000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33718000" />
+    <option name="totallyTimeSpent" value="33759000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -1911,7 +1911,7 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="136">
-            <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
+            <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
           </first_editor>
           <second_editor />
         </state>

@@ -6,7 +6,7 @@ L’éditeur vous demande de développer un site web de e-commerce comprenant de
 * La seconde récapitule le panier où sera appliquée __la meilleure offre commerciale possible__.
 
 ## Development server
-* RUN `npm install` to download package
+* Run `npm install` to download package
 * Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Running unit tests
