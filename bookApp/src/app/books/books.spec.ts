@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { FormsModule } from '@angular/forms';
 
 //component
 import { AppComponent } from '../app.component';
@@ -13,6 +14,10 @@ import {BooksService} from "./books.service";
 //model
 import { Book } from "../models/book.model";
 
+//filter
+import {FilterPipe} from "../cart/pipe/filter.pipe";
+
+
 
 describe('AppComponent', () => {
 
@@ -23,12 +28,14 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        FormsModule
       ],
       declarations: [
         AppComponent,
         BooksComponent,
-        BookComponent
+        BookComponent,
+        FilterPipe
       ],
       providers: [BooksService]
     });

@@ -9,6 +9,8 @@ import {BookComponent} from "../books/book/book.component";
 
 //service
 import {OfferService} from "./offer.service";
+import {FormsModule} from "@angular/forms";
+import {FilterPipe} from "../cart/pipe/filter.pipe";
 
 
 
@@ -21,12 +23,14 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        FormsModule
       ],
       declarations: [
         AppComponent,
         BooksComponent,
-        BookComponent
+        BookComponent,
+        FilterPipe
       ],
       providers: [OfferService]
     });

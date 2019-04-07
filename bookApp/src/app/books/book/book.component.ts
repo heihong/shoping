@@ -16,10 +16,20 @@ export class BookComponent{
   constructor(private http: HttpClient , private BookService: BooksService, private globals : Globals){
 
   }
-  cart =  this.globals.cart;
 
   addToCart(book){
-    this.cart.push(book);
-    this.globals.cart = this.cart;
+    this.globals.cart.push(book);
+    this.sortBy('price');
+  }
+  sortBy(field: string) {
+    this.globals.cart.sort((a: any, b: any) => {
+      if (a[field] < b[field]) {
+        return -1;
+      } else if (a[field] > b[field]) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
   }
 }
