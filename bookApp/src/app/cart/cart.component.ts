@@ -87,4 +87,5 @@ export class CartComponent implements OnInit{
     this.globals.cart.splice(0, this.globals.cart.length);
   }
 
+
 }

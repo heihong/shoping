@@ -24,4 +24,11 @@ export class BookCartComponent{
     this.globals.cart.splice(index, 1);
     this.uploaded.emit('complete');
   }
+
+  numberBook(isbn){
+    console.log(isbn)
+    console.log(this.globals.cart.filter((book)=> book.isbn == isbn).length)
+    return this.globals.cart.filter((book)=> book.isbn == isbn).length;
+  }
+
 }
