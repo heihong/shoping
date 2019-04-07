@@ -2,9 +2,11 @@
 https://github.com/xebia-france/recruitment-tests/blob/master/ExerciceFront.md
 
 L’éditeur vous demande de développer un site web de e-commerce comprenant deux interfaces :
+* La première permet d’afficher les livres que l’on souhaite acheter et d’effectuer une recherche libre
+* La seconde récapitule le panier où sera appliquée __la meilleure offre commerciale possible__.
 
-La première permet d’afficher les livres que l’on souhaite acheter et d’effectuer une recherche libre
-La seconde récapitule le panier où sera appliquée la meilleure offre commerciale possible.
+Sachez que l’éditeur attachera une attention toute particulière à __la qualité de votre programmation__.
+&nbsp;
 
 ## Development server
 RUN `npm install` to download package
