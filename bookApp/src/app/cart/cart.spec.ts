@@ -1,12 +1,11 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import {CartComponent} from "./cart.component";
-import {FormsModule} from "@angular/forms";
+import { CartComponent } from "./cart.component";
+import { FormsModule } from "@angular/forms";
 
 //component
 import { AppComponent } from '../app.component';
-import {BooksComponent} from "../books/books.component";
 import { BookComponent } from "../books/book/book.component"
 
 //service
@@ -16,14 +15,12 @@ import {BookCartComponent} from "./book/bookCart.component";
 
 
 
-describe('AppComponent', () => {
+describe('CartComponent', () => {
 
   let httpMock : HttpTestingController;
   let globals : Globals;
-  let bookComponent : ComponentFixture<BookComponent>
   let cartComponent: ComponentFixture<CartComponent>;
   let cartComponentInstance;
-  let bookComponentInstance;
 
 
   beforeEach(() => {
@@ -35,7 +32,6 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
-        BooksComponent,
         BookComponent,
         CartComponent,
         FilterPipe,
@@ -46,9 +42,7 @@ describe('AppComponent', () => {
     }).compileComponents()
     httpMock = TestBed.get(HttpTestingController);
     globals = TestBed.get(Globals)
-    bookComponent = TestBed.createComponent(BookComponent)
     cartComponent = TestBed.createComponent(CartComponent);
-    bookComponentInstance = bookComponent.componentInstance;
     cartComponentInstance = cartComponent.componentInstance;
   });
 
@@ -78,9 +72,6 @@ describe('AppComponent', () => {
 
 
 
-
-
-
   it('should return total', ()  =>{
     expect(cartComponentInstance.total(books)).toEqual(65);
   })
@@ -91,7 +82,7 @@ describe('AppComponent', () => {
   })
 
 
-  it('should return resultCalcul percentage', ()  =>{
+  it('should call getOffer and return resultCalcul percentage', ()  =>{
 
     // calculation percentage 65 * 5%
     let resulCalcul = 61.75;
@@ -111,7 +102,7 @@ describe('AppComponent', () => {
     expect(cartComponentInstance.getOffer(bestOffer, resulCalcul, indexCourant)).toEqual(resultbestOffer);
   })
 
-  it('should return resultCalcul minus', ()  =>{
+  it('should call getOffer return resultCalcul minus', ()  =>{
     // calculation minus 65 * 15
     let resultCalcul = 50;
 
@@ -188,6 +179,10 @@ describe('AppComponent', () => {
   })
 
 
-
+  it('should clear the cart', ()  =>{
+    globals.cart = books;
+    cartComponentInstance.clearCart()
+    expect(globals.cart.length).toEqual(0);
+  })
 
 });

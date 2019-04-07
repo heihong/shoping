@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import { OfferService} from "../offer/offer.service";
-import { BookCartComponent } from "./book/bookCart.component"
 
 import {Globals} from "../globals/globals";
 

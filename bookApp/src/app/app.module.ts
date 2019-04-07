@@ -11,7 +11,6 @@ import {CartComponent} from "./cart/cart.component";
 import {Globals} from "./globals/globals";
 import {BookComponent} from "./books/book/book.component";
 import {BookCartComponent} from "./cart/book/bookCart.component";
-import {UniquePipe} from "./cart/pipe/unique.pipe";
 import {FilterPipe} from "./cart/pipe/filter.pipe";
 
 
@@ -22,7 +21,6 @@ import {FilterPipe} from "./cart/pipe/filter.pipe";
     CartComponent,
     BookComponent,
     BookCartComponent,
-    UniquePipe,
     FilterPipe
   ],
   imports: [

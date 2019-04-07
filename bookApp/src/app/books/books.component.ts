@@ -23,6 +23,6 @@ export class BooksComponent implements OnInit{
     this.BookService.getBooks()
       .subscribe((data) =>
         this.books = data
-  );
+      );
   }
 }

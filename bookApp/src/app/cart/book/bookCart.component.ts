@@ -1,13 +1,10 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BooksService } from './../../books/books.service';
 import { Globals} from "../../globals/globals";
 import {Book} from "./../../models/book.model"
 
 @Component({
   selector: 'app-book-cart',
-  templateUrl: './bookCart.component.html',
-  providers: [ BooksService ]
+  templateUrl: './bookCart.component.html'
 })
 export class BookCartComponent{
 
@@ -16,7 +13,7 @@ export class BookCartComponent{
   @Output() uploaded = new EventEmitter<string>();
 
 
-  constructor(private http: HttpClient , private BookService: BooksService, private globals : Globals){
+  constructor(private globals : Globals){
 
   }
 
@@ -24,11 +21,4 @@ export class BookCartComponent{
     this.globals.cart.splice(index, 1);
     this.uploaded.emit('complete');
   }
-
-  numberBook(isbn){
-    console.log(isbn)
-    console.log(this.globals.cart.filter((book)=> book.isbn == isbn).length)
-    return this.globals.cart.filter((book)=> book.isbn == isbn).length;
-  }
-
 }
