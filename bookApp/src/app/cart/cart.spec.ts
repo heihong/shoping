@@ -78,16 +78,43 @@ describe('AppComponent', () => {
   })
 
 
-  it('should return resultCalcul', ()  =>{
-    let total = 30;
-    let resultCalcul = [30 , 0];
-    expect(component.getInfIndex([-1, -1], total, 0)).toEqual(resultCalcul);
+  it('should return resultCalcul percentage', ()  =>{
+
+    // calculation percentage 65 * 5%
+    let resulCalcul = 61.75;
+
+    let bestOffer = {
+      min : -1,
+      index : -1
+    };
+
+    let resultbestOffer = {
+      min : 61.75,
+      index : 0
+    };
+
+    let indexCourant = 0;
+
+    expect(component.getOffer(bestOffer, resulCalcul, indexCourant)).toEqual(resultbestOffer);
   })
 
-  it('should return resultCalcul', ()  =>{
-    let total = 30;
-    let bestOfferTotal = [40,2];
-    expect(component.getInfIndex(bestOfferTotal, total , 1)).toEqual([30,1]);
+  it('should return resultCalcul minus', ()  =>{
+    // calculation minus 65 * 15
+    let resultCalcul = 50;
+
+    let bestOffer = {
+      min : 61.75,
+      index : 0
+    };
+
+    let resultbestOffer = {
+      min: 50,
+      index :1
+    }
+
+    let indexCourant = 1;
+
+    expect(component.getOffer(bestOffer, resultCalcul , indexCourant)).toEqual(resultbestOffer);
   })
 
   // offer 1
@@ -110,8 +137,11 @@ describe('AppComponent', () => {
 
 
   it('should return the best offer1', ()  =>{
-    let result= [50,1];
-    expect(component.bestOffer(offers1, books)).toEqual(result);
+    let resulBestOffer = {
+      min : 50,
+      index : 1
+    };
+    expect(component.bestOffer(offers1, books)).toEqual(resulBestOffer);
   })
 
 
@@ -133,8 +163,11 @@ describe('AppComponent', () => {
   ];
 
   it('should return the best offer2', ()  =>{
-    let result  = [45.5 , 0]
-    expect(component.bestOffer(offers2, books)).toEqual(result);
+    let resulBestOffer = {
+      min : 45.5,
+      index : 0
+    };
+    expect(component.bestOffer(offers2, books)).toEqual(resulBestOffer);
   })
 
 
