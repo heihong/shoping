@@ -5,9 +5,11 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 //component
 import { AppComponent } from '../app.component';
 import {BooksComponent} from "../books/books.component";
+import {BookComponent} from "../books/book/book.component";
 
 //service
 import {OfferService} from "./offer.service";
+
 
 
 describe('AppComponent', () => {
@@ -23,7 +25,8 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
-        BooksComponent
+        BooksComponent,
+        BookComponent
       ],
       providers: [OfferService]
     });

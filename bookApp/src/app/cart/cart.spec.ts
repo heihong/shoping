@@ -5,6 +5,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 //component
 import { AppComponent } from '../app.component';
 import {BooksComponent} from "../books/books.component";
+import { BookComponent } from "../books/book/book.component"
 
 //service
 import {Globals} from "../globals/globals";
@@ -29,7 +30,8 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         BooksComponent,
-        CartComponent
+        CartComponent,
+        BookComponent
       ],
       providers: [Globals]
     }).compileComponents()
@@ -141,6 +143,7 @@ describe('AppComponent', () => {
       min : 50,
       index : 1
     };
+    globals.totalAmount = 65;
     expect(component.bestOffer(offers1, books)).toEqual(resulBestOffer);
   })
 
@@ -167,6 +170,7 @@ describe('AppComponent', () => {
       min : 45.5,
       index : 0
     };
+    globals.totalAmount = 65;
     expect(component.bestOffer(offers2, books)).toEqual(resulBestOffer);
   })
 
