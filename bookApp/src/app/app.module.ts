@@ -4,17 +4,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import {BookComponent} from "./book/book.component";
+import {BooksComponent} from "./books/books.component";
 import {CartComponent} from "./cart/cart.component";
 
 import {Globals} from "./globals/globals";
+import {BookComponent} from "./books/book/book.component";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    BookComponent,
-    CartComponent
+    BooksComponent,
+    CartComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,

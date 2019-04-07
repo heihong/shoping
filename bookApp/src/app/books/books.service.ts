@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {Book} from "../models/book.model";
 
 @Injectable()
-export class BookService {
+export class BooksService {
 
   booksUrl = 'http://henri-potier.xebia.fr/books';
 

@@ -4,7 +4,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 //component
 import { AppComponent } from '../app.component';
-import {BookComponent} from "./../book/book.component";
+import {BooksComponent} from "../books/books.component";
 
 //service
 import {Globals} from "../globals/globals";
@@ -14,7 +14,7 @@ import {CartComponent} from "./cart.component";
 describe('AppComponent', () => {
 
   let httpMock : HttpTestingController;
-  let bookComponent : ComponentFixture<BookComponent>;
+  let booksComponent : ComponentFixture<BooksComponent>;
   let globals : Globals;
   let cartComponent: ComponentFixture<CartComponent>;
   let component;
@@ -28,7 +28,7 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
-        BookComponent,
+        BooksComponent,
         CartComponent
       ],
       providers: [Globals]

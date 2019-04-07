@@ -4,4 +4,7 @@ import { Injectable } from '@angular/core';
 export class Globals {
   cart: any = [];
   totalAmount : number;
+  offers : any;
+  bestOffer = { min : -1,
+                index : 0};
 }

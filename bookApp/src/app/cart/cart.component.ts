@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { OfferService} from "../offer/offer.service";
 
 import {Globals} from "../globals/globals";
@@ -8,10 +8,18 @@ import {Globals} from "../globals/globals";
   templateUrl: './cart.component.html',
   providers: [OfferService],
 })
-export class CartComponent{
+export class CartComponent implements OnInit{
 
   private offers;
   constructor(private globals: Globals, private offerService : OfferService){
+  }
+
+  ngOnInit(){
+    this.globals.totalAmount = this.total(this.globals.cart);
+    if(this.globals.cart.length > 0){
+      this.getOffers(this.getlistIsbn(this.globals.cart));
+    }
+
   }
 
   total(books){
@@ -33,13 +41,14 @@ export class CartComponent{
 
 
   getOffers(listIsbn){
-    this.offerService.getOffer(this.getlistIsbn(listIsbn)).subscribe((data)=>{
-      this.offers= data['offers'];
+    this.offerService.getOffer(listIsbn).subscribe((data)=>{
+      console.log(data['offers'])
+      this.globals.offers= data['offers'];
+      this.globals.bestOffer = this.bestOffer(data['offers']);
     })
-    return this.offers;
   }
 
-  getOffer( bestOffer, resultCalcul, index){
+  getOffer(bestOffer, resultCalcul, index){
     if(bestOffer.min == -1){
       bestOffer.min = resultCalcul;
       bestOffer.index = index;
@@ -53,20 +62,20 @@ export class CartComponent{
   }
 
 
-  bestOffer(offers, books){
+  bestOffer(offers){
     let bestOffer = {
       min: -1,
       index : -1
     };
     for(let i = 0 ; i< offers.length ; i++){
       if(offers[i].type == 'percentage'){
-        bestOffer = this.getOffer(bestOffer, this.offerService.calculPercentage(this.total(books), offers[i].value) ,i)
+        bestOffer = this.getOffer(bestOffer, this.offerService.calculPercentage(this.globals.totalAmount, offers[i].value) ,i)
       }
       if(offers[i].type == 'minus'){
-        bestOffer = this.getOffer(bestOffer, this.offerService.calculMinus(this.total(books), offers[i].value) ,i)
+        bestOffer = this.getOffer(bestOffer, this.offerService.calculMinus(this.globals.totalAmount, offers[i].value) ,i)
       }
       if(offers[i].type == 'slice'){
-        bestOffer = this.getOffer(bestOffer, this.offerService.calculSlide(this.total(books), offers[i].value, offers[i].sliceValue),i)
+        bestOffer = this.getOffer(bestOffer, this.offerService.calculSlide(this.globals.totalAmount, offers[i].value, offers[i].sliceValue),i)
       }
     }
     return bestOffer;

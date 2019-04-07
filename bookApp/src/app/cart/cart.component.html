@@ -1,6 +1,24 @@
-<ul>
-  <li *ngFor="let product of globals.cart">{{product.price}}</li>
-</ul>
-<button (click)="bestOffer()"></button>
-<pre>{{offers | json}}</pre>
-<span>total {{total(globals.cart)}}</span>
+<div *ngIf="globals.cart.length == 0">
+  <span>cart empty</span>
+</div>
+
+<div *ngIf="globals.cart.length > 0">
+  <div class="row">
+    <div *ngFor="let product of globals.cart" class="padding20">
+      <app-book [book] = "product"></app-book>
+    </div>
+  </div>
+  <div>
+    Total cart : {{globals.totalAmount}}
+  </div>
+
+  <div>
+    Discount cart : {{globals.bestOffer.min}}
+  </div>
+
+  <div>
+    Type Discount {{globals.offers[globals.bestOffer.index].type}}
+  </div>
+</div>
+
+

@@ -4,10 +4,10 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 //component
 import { AppComponent } from '../app.component';
-import {BookComponent} from "./book.component";
+import {BooksComponent} from "./books.component";
 
 //service
-import {BookService} from "./book.service";
+import {BooksService} from "./books.service";
 
 //model
 import { Book } from "../models/book.model";
@@ -15,7 +15,7 @@ import { Book } from "../models/book.model";
 
 describe('AppComponent', () => {
 
-  let bookService : BookService;
+  let bookService : BooksService;
   let httpMock : HttpTestingController;
 
   beforeEach(() => {
@@ -26,12 +26,12 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
-        BookComponent
+        BooksComponent
       ],
-      providers: [BookService]
+      providers: [BooksService]
     });
 
-    bookService = TestBed.get(BookService);
+    bookService = TestBed.get(BooksService);
     httpMock = TestBed.get(HttpTestingController);
   });
 
