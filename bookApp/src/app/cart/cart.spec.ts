@@ -6,12 +6,11 @@ import { FormsModule } from "@angular/forms";
 
 //component
 import { AppComponent } from '../app.component';
-import { BookComponent } from "../books/book/book.component"
+import { BookComponent } from "../book/book.component"
 
 //service
 import {Globals} from "../globals/globals";
 import {FilterPipe} from "./pipe/filter.pipe";
-import {BookCartComponent} from "./book/bookCart.component";
 
 
 
@@ -34,9 +33,7 @@ describe('CartComponent', () => {
         AppComponent,
         BookComponent,
         CartComponent,
-        FilterPipe,
-        BookCartComponent
-
+        FilterPipe
       ],
       providers: [Globals]
     }).compileComponents()
@@ -220,5 +217,29 @@ describe('CartComponent', () => {
     globals.cart = books;
     expect(cartComponentInstance.textSlice()).toEqual('-14 for each 80');
   })
+
+  it('should remove a book to cart', ()  =>{
+    globals.cart = [
+      {
+        "isbn": "c8fabf68-8374-48fe-a7ea-a00ccd07afff",
+        "title": "Henri Potier à l'école des sorciers",
+        "price": 35,
+        "cover": "http://henri-potier.xebia.fr/hp0.jpg",
+        "synopsis": [
+          "Après la mort de ses parents"
+        ]
+      },
+      {
+        "isbn": "a460afed-e5e7-4e39-a39d-c885c05db861",
+        "title": "Henri Potier et la Chambre des secrets",
+        "price": 30,
+        "cover": "http://henri-potier.xebia.fr/hp1.jpg",
+        "synopsis": [
+          "Henri Potier passe l'été chez les Dursley et reçoit la visite de Dobby, un elfe de maison."
+        ]
+      }];
+    cartComponentInstance.removeToCart(1);
+    expect(globals.cart.length).toEqual(1);
+  });
 
 });

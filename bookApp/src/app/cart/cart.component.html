@@ -21,7 +21,7 @@
   </div>
   <div class="row align">
     <div *ngFor="let product of globals.cart, let i = index" [attr.data-index]="i" class="margin">
-      <app-book-cart [book]="product" [index] = "i" (uploaded) = "getOffers(getlistIsbn(globals.cart))"></app-book-cart>
+      <app-book [book]="product" (eventButton) = "removeToCart(i)" nameButton = "remove from cart"></app-book>
     </div>
   </div>
 
