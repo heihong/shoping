@@ -46,6 +46,11 @@ export class CartComponent implements OnInit{
     })
   }
 
+  removeToCart(index){
+    this.globals.cart.splice(index, 1);
+    this.getOffers(this.getlistIsbn(this.globals.cart));
+  }
+
   getBestOffer(bestOffer, resultCalcul, index){
     if(bestOffer.min == -1){
       bestOffer.min = resultCalcul;

@@ -9,8 +9,7 @@ import {BooksComponent} from "./books/books.component";
 import {CartComponent} from "./cart/cart.component";
 
 import {Globals} from "./globals/globals";
-import {BookComponent} from "./books/book/book.component";
-import {BookCartComponent} from "./cart/book/bookCart.component";
+import {BookComponent} from "./book/book.component";
 import {FilterPipe} from "./cart/pipe/filter.pipe";
 
 
@@ -20,7 +19,6 @@ import {FilterPipe} from "./cart/pipe/filter.pipe";
     BooksComponent,
     CartComponent,
     BookComponent,
-    BookCartComponent,
     FilterPipe
   ],
   imports: [
