@@ -1,13 +1,18 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import {Book} from "../../models/book.model";
 @Pipe({
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
-  transform(items: any[], searchText: string): any[] {
-    if(!items) return [];
-    if(!searchText) return items;
+  transform(books: [Book], searchText: string): any[] {
+    if(!books){
+      return [];
+    }
+    if(!searchText) {
+      return books;
+    }
     searchText = searchText.toLowerCase();
-    return items.filter( it => {
+    return books.filter( it => {
       return it.title.toLowerCase().includes(searchText);
     });
   }
