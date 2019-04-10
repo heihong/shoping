@@ -1,7 +1,7 @@
-import { Component , OnInit} from '@angular/core';
+import { Component , OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BooksService } from './books.service';
-import {Globals} from "../globals/globals";
+import { Globals } from "../globals/globals";
 
 @Component({
   selector: 'app-books',

@@ -5,12 +5,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import {BooksComponent} from "./books/books.component";
-import {CartComponent} from "./cart/cart.component";
+import { BooksComponent } from "./books/books.component";
+import { CartComponent } from "./cart/cart.component";
 
-import {Globals} from "./globals/globals";
-import {BookComponent} from "./book/book.component";
-import {FilterPipe} from "./cart/pipe/filter.pipe";
+import { Globals } from "./globals/globals";
+import { BookComponent } from "./book/book.component";
+import { FilterPipe } from "./cart/pipe/filter.pipe";
 
 
 @NgModule({

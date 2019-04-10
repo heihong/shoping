@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OfferService} from "../offer/offer.service";
 
-import {Globals} from "../globals/globals";
+import { Globals } from "../globals/globals";
 
 @Component({
   selector: 'app-cart',
@@ -22,21 +22,13 @@ export class CartComponent implements OnInit{
 
   }
 
+
   total(books){
-    let total = 0 ;
-    for(let i = 0 ; i< books.length ; i++){
-      total = total + books[i].price;
-    }
-    return total;
+    return books.reduce((acc, b) => acc + b.price, 0);
   }
 
   getlistIsbn(books){
-    let istIsbn = [];
-
-    for(let i = 0 ; i< books.length ; i++){
-      istIsbn.push(books[i].isbn);
-    }
-    return istIsbn;
+    return books.map(b => b.isbn);
   }
 
 
@@ -72,14 +64,17 @@ export class CartComponent implements OnInit{
     };
     if(offers) {
       for (let i = 0; i < offers.length; i++) {
-        if (offers[i].type == 'percentage') {
-          bestOffer = this.getBestOffer(bestOffer, this.offerService.calculPercentage(this.total(this.globals.cart), offers[i].value), i)
-        }
-        if (offers[i].type == 'minus') {
-          bestOffer = this.getBestOffer(bestOffer, this.offerService.calculMinus(this.total(this.globals.cart), offers[i].value), i)
-        }
-        if (offers[i].type == 'slice') {
-          bestOffer = this.getBestOffer(bestOffer, this.offerService.calculSlide(this.total(this.globals.cart), offers[i].value, offers[i].sliceValue), i)
+        switch (offers[i].type) {
+          case 'percentage':
+            bestOffer = this.getBestOffer(bestOffer, this.offerService.calculPercentage(this.total(this.globals.cart), offers[i].value), i)
+            break;
+          case 'minus':
+            bestOffer = this.getBestOffer(bestOffer, this.offerService.calculMinus(this.total(this.globals.cart), offers[i].value), i)
+            break;
+          case 'slice':
+            bestOffer = this.getBestOffer(bestOffer, this.offerService.calculSlide(this.total(this.globals.cart), offers[i].value, offers[i].sliceValue), i)
+            break;
+
         }
       }
     }
@@ -92,16 +87,14 @@ export class CartComponent implements OnInit{
   }
 
   textPercentage(){
-    return '-' + this.globals.offers[this.bestOfferCart(this.globals.offers).index].value + '%';
+    return `-${this.globals.offers[this.bestOfferCart(this.globals.offers).index].value}%`;
   }
 
   textMinus(){
-    return '-' + this.globals.offers[this.bestOfferCart(this.globals.offers).index].value;
+    return `-${this.globals.offers[this.bestOfferCart(this.globals.offers).index].value}`;
   }
 
   textSlice(){
-    return '-' + this.globals.offers[this.bestOfferCart(this.globals.offers).index].value +' for each ' + this.globals.offers[this.bestOfferCart(this.globals.offers).index].sliceValue;
+    return `-${this.globals.offers[this.bestOfferCart(this.globals.offers).index].value} for each ${this.globals.offers[this.bestOfferCart(this.globals.offers).index].sliceValue}`;
   }
-
-
 }

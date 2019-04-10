@@ -7,7 +7,7 @@ export class OfferService {
   constructor(private http: HttpClient) { }
 
   getOffer(booksIsbn) {
-    return this.http.get(`http://henri-potier.xebia.fr/books/` + booksIsbn.join(',') + `/commercialOffers`)
+    return this.http.get(`http://henri-potier.xebia.fr/books/${booksIsbn.join(',')}/commercialOffers`)
   }
 
   calculMinus(total, value){

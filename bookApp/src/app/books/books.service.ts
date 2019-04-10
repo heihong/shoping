@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Book} from "../models/book.model";
+import { Book } from "../models/book.model";
 
 @Injectable()
 export class BooksService {
