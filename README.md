@@ -11,5 +11,5 @@ L’éditeur vous demande de développer un site web de e-commerce comprenant de
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests.
+Run `ng test` to execute the unit tests and see the coverage.
 
