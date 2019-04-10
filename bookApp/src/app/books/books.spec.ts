@@ -17,7 +17,7 @@ import { Book } from "../models/book.model";
 //filter
 import {FilterPipe} from "../cart/pipe/filter.pipe";
 
-import {CartData} from "../globals/globals";
+import {CartData} from "../cartData/cartData";
 
 
 

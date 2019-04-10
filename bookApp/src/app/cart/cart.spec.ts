@@ -9,7 +9,7 @@ import { AppComponent } from '../app.component';
 import { BookComponent } from "../book/book.component"
 
 //service
-import {CartData} from "../globals/globals";
+import {CartData} from "../cartData/cartData";
 import {FilterPipe} from "./pipe/filter.pipe";
 
 
