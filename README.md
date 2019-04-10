@@ -11,6 +11,6 @@ L’éditeur vous demande de développer un site web de e-commerce comprenant de
 * Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 ## Running unit tests
-
-Run `ng test` to execute the unit tests and see the coverage.
+* Run `cd bookApp`
+* Run `ng test` to execute the unit tests and see the coverage.
 
