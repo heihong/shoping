@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OfferService} from "../offer/offer.service";
 
-import { Globals } from "../globals/globals";
+import { CartData } from "../globals/globals";
 
 @Component({
   selector: 'app-cart',
@@ -12,12 +12,12 @@ import { Globals } from "../globals/globals";
 export class CartComponent implements OnInit{
 
   private offers;
-  constructor(private globals: Globals, private offerService : OfferService){
+  constructor(private cartData: CartData, private offerService : OfferService){
   }
 
   ngOnInit(){
-    if(this.globals.cart.length > 0){
-      this.getOffers(this.getlistIsbn(this.globals.cart));
+    if(this.cartData.cart.length > 0){
+      this.getOffers(this.getlistIsbn(this.cartData.cart));
     }
 
   }
@@ -34,13 +34,13 @@ export class CartComponent implements OnInit{
 
   getOffers(listIsbn){
     this.offerService.getOffer(listIsbn).subscribe((data)=>{
-      this.globals.offers= data['offers'];
+      this.cartData.offers= data['offers'];
     })
   }
 
   removeToCart(index){
-    this.globals.cart.splice(index, 1);
-    this.getOffers(this.getlistIsbn(this.globals.cart));
+    this.cartData.cart.splice(index, 1);
+    this.getOffers(this.getlistIsbn(this.cartData.cart));
   }
 
   getBestOffer(bestOffer, resultCalcul, index){
@@ -66,13 +66,13 @@ export class CartComponent implements OnInit{
       for (let i = 0; i < offers.length; i++) {
         switch (offers[i].type) {
           case 'percentage':
-            bestOffer = this.getBestOffer(bestOffer, this.offerService.calculPercentage(this.total(this.globals.cart), offers[i].value), i)
+            bestOffer = this.getBestOffer(bestOffer, this.offerService.calculPercentage(this.total(this.cartData.cart), offers[i].value), i)
             break;
           case 'minus':
-            bestOffer = this.getBestOffer(bestOffer, this.offerService.calculMinus(this.total(this.globals.cart), offers[i].value), i)
+            bestOffer = this.getBestOffer(bestOffer, this.offerService.calculMinus(this.total(this.cartData.cart), offers[i].value), i)
             break;
           case 'slice':
-            bestOffer = this.getBestOffer(bestOffer, this.offerService.calculSlide(this.total(this.globals.cart), offers[i].value, offers[i].sliceValue), i)
+            bestOffer = this.getBestOffer(bestOffer, this.offerService.calculSlide(this.total(this.cartData.cart), offers[i].value, offers[i].sliceValue), i)
             break;
 
         }
@@ -83,18 +83,18 @@ export class CartComponent implements OnInit{
 
 
   clearCart(){
-    this.globals.cart.splice(0, this.globals.cart.length);
+    this.cartData.cart.splice(0, this.cartData.cart.length);
   }
 
   textPercentage(){
-    return `-${this.globals.offers[this.bestOfferCart(this.globals.offers).index].value}%`;
+    return `-${this.cartData.offers[this.bestOfferCart(this.cartData.offers).index].value}%`;
   }
 
   textMinus(){
-    return `-${this.globals.offers[this.bestOfferCart(this.globals.offers).index].value}`;
+    return `-${this.cartData.offers[this.bestOfferCart(this.cartData.offers).index].value}`;
   }
 
   textSlice(){
-    return `-${this.globals.offers[this.bestOfferCart(this.globals.offers).index].value} for each ${this.globals.offers[this.bestOfferCart(this.globals.offers).index].sliceValue}`;
+    return `-${this.cartData.offers[this.bestOfferCart(this.cartData.offers).index].value} for each ${this.cartData.offers[this.bestOfferCart(this.cartData.offers).index].sliceValue}`;
   }
 }

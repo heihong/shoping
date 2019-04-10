@@ -9,7 +9,7 @@ import { AppComponent } from '../app.component';
 import { BookComponent } from "../book/book.component"
 
 //service
-import {Globals} from "../globals/globals";
+import {CartData} from "../globals/globals";
 import {FilterPipe} from "./pipe/filter.pipe";
 
 
@@ -17,7 +17,7 @@ import {FilterPipe} from "./pipe/filter.pipe";
 describe('CartComponent', () => {
 
   let httpMock : HttpTestingController;
-  let globals : Globals;
+  let cartData : CartData;
   let cartComponent: ComponentFixture<CartComponent>;
   let cartComponentInstance;
 
@@ -35,10 +35,10 @@ describe('CartComponent', () => {
         CartComponent,
         FilterPipe
       ],
-      providers: [Globals]
+      providers: [CartData]
     }).compileComponents()
     httpMock = TestBed.get(HttpTestingController);
-    globals = TestBed.get(Globals)
+    cartData = TestBed.get(CartData)
     cartComponent = TestBed.createComponent(CartComponent);
     cartComponentInstance = cartComponent.componentInstance;
   });
@@ -142,8 +142,7 @@ describe('CartComponent', () => {
       min : 50,
       index : 1
     };
-    globals.totalAmount = 65;
-    globals.cart = books;
+    cartData.cart = books;
     expect(cartComponentInstance.bestOfferCart(offers1)).toEqual(resulBestOffer);
   })
 
@@ -170,21 +169,20 @@ describe('CartComponent', () => {
       min : 45.5,
       index : 0
     };
-    globals.totalAmount = 65;
-    globals.cart = books;
+    cartData.cart = books;
     expect(cartComponentInstance.bestOfferCart(offers2)).toEqual(resulBestOffer);
   })
 
 
   it('should clear the cart', ()  =>{
-    globals.cart = books;
+    cartData.cart = books;
     cartComponentInstance.clearCart()
-    expect(globals.cart.length).toEqual(0);
+    expect(cartData.cart.length).toEqual(0);
   })
 
   it('should return -15', ()  =>{
-    globals.offers = offers1;
-    globals.cart = books;
+    cartData.offers = offers1;
+    cartData.cart = books;
     expect(cartComponentInstance.textMinus()).toEqual('-15');
   })
 
@@ -197,8 +195,8 @@ describe('CartComponent', () => {
   ];
 
   it('should return -4%', ()  =>{
-    globals.offers = offers3;
-    globals.cart = books;
+    cartData.offers = offers3;
+    cartData.cart = books;
     expect(cartComponentInstance.textPercentage()).toEqual('-4%');
   })
 
@@ -213,13 +211,13 @@ describe('CartComponent', () => {
   ];
 
   it('should return -14 for each 80', ()  =>{
-    globals.offers = offers4;
-    globals.cart = books;
+    cartData.offers = offers4;
+    cartData.cart = books;
     expect(cartComponentInstance.textSlice()).toEqual('-14 for each 80');
   })
 
   it('should remove a book to cart', ()  =>{
-    globals.cart = [
+    cartData.cart = [
       {
         "isbn": "c8fabf68-8374-48fe-a7ea-a00ccd07afff",
         "title": "Henri Potier à l'école des sorciers",
@@ -239,7 +237,7 @@ describe('CartComponent', () => {
         ]
       }];
     cartComponentInstance.removeToCart(1);
-    expect(globals.cart.length).toEqual(1);
+    expect(cartData.cart.length).toEqual(1);
   });
 
 });

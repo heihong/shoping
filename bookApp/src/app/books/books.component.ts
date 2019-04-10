@@ -1,7 +1,7 @@
 import { Component , OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BooksService } from './books.service';
-import { Globals } from "../globals/globals";
+import { CartData } from "../globals/globals";
 
 @Component({
   selector: 'app-books',
@@ -10,7 +10,7 @@ import { Globals } from "../globals/globals";
   styleUrls: ['./books.component.css']
 })
 export class BooksComponent implements OnInit{
-  constructor(private http: HttpClient , private booksService: BooksService, private globals : Globals){
+  constructor(private http: HttpClient , private booksService: BooksService, private cartData : CartData){
 
   }
 
@@ -24,7 +24,7 @@ export class BooksComponent implements OnInit{
   }
 
   addToCart(book) {
-    this.globals.cart.push(book);
+    this.cartData.cart.push(book);
   }
 
 

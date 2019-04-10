@@ -17,13 +17,13 @@ import { Book } from "../models/book.model";
 //filter
 import {FilterPipe} from "../cart/pipe/filter.pipe";
 
-import {Globals} from "../globals/globals";
+import {CartData} from "../globals/globals";
 
 
 
 describe('BooksService', () => {
 
-  let globals : Globals;
+  let cartData : CartData;
   let booksService : BooksService;
   let httpMock : HttpTestingController;
   let booksComponent : ComponentFixture<BooksComponent>;
@@ -43,9 +43,9 @@ describe('BooksService', () => {
         BookComponent,
         FilterPipe
       ],
-      providers: [BooksService, Globals]
+      providers: [BooksService, CartData]
     });
-    globals = TestBed.get(Globals);
+    cartData = TestBed.get(CartData);
     booksService = TestBed.get(BooksService);
     httpMock = TestBed.get(HttpTestingController);
     booksComponent = TestBed.createComponent(BooksComponent);
@@ -55,6 +55,7 @@ describe('BooksService', () => {
   afterEach(()=>{
     httpMock.verify();
   })
+
   const bookMockData : Book[] = [
     {
       "isbn": "c8fabf68-8374-48fe-a7ea-a00ccd07afff",
@@ -109,7 +110,7 @@ describe('BooksService', () => {
   });
 
   it('should add to cart', ()  =>{
-    globals.cart = [
+    cartData.cart = [
       {
         "isbn": "c8fabf68-8374-48fe-a7ea-a00ccd07afff",
         "title": "Henri Potier à l'école des sorciers",
@@ -138,7 +139,7 @@ describe('BooksService', () => {
       ]
     };
     booksComponentInstance.addToCart(book);
-    expect(globals.cart.length).toEqual(3);
+    expect(cartData.cart.length).toEqual(3);
   });
 
 });
