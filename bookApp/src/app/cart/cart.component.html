@@ -1,26 +1,26 @@
-<div *ngIf="globals.cart.length == 0">
+<div *ngIf="cartData.cart.length == 0">
   <span>Empty cart</span>
 </div>
 
-<div *ngIf="globals.cart.length > 0">
+<div *ngIf="cartData.cart.length > 0">
   <button (click)="clearCart()" class="btn btn-primary">clear cart</button>
   <div>
-    Total : <span>{{bestOfferCart(globals.offers).min}}€</span> <span class="line margin-left">{{total(this.globals.cart)}}€</span>
+    Total : <span>{{bestOfferCart(cartData.offers).min}}€</span> <span class="line margin-left">{{total(this.cartData.cart)}}€</span>
   </div>
 
-  <div *ngIf="bestOfferCart(globals.offers).index !=-1 && globals.offers[bestOfferCart(globals.offers).index].type == 'percentage' ">
+  <div *ngIf="bestOfferCart(cartData.offers).index !=-1 && cartData.offers[bestOfferCart(cartData.offers).index].type == 'percentage' ">
     Discount : {{textPercentage()}}
   </div>
 
-  <div *ngIf="bestOfferCart(globals.offers).index !=-1 && globals.offers[bestOfferCart(globals.offers).index].type == 'minus' ">
+  <div *ngIf="bestOfferCart(cartData.offers).index !=-1 && cartData.offers[bestOfferCart(cartData.offers).index].type == 'minus' ">
     Discount : {{textMinus()}}
   </div>
 
-  <div *ngIf="bestOfferCart(globals.offers).index !=-1 && globals.offers[bestOfferCart(globals.offers).index].type == 'slice' ">
+  <div *ngIf="bestOfferCart(cartData.offers).index !=-1 && cartData.offers[bestOfferCart(cartData.offers).index].type == 'slice' ">
     Discount : {{textSlice()}}
   </div>
   <div class="row align">
-    <div *ngFor="let product of globals.cart, let i = index" [attr.data-index]="i" class="margin">
+    <div *ngFor="let product of cartData.cart, let i = index" [attr.data-index]="i" class="margin">
       <app-book [book]="product" (eventButton) = "removeToCart(i)" nameButton = "remove from cart"></app-book>
     </div>
   </div>
