@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { CartComponent } from "./cart/cart.component";
 import { CartData } from "./cartData/cartData";
 import { BookComponent } from "./book/book.component";
 import { FilterPipe } from "./cart/pipe/filter.pipe";
+import {InMemoryDataService} from "./memoryData/InMemoryDataService";
 
 
 @NgModule({
@@ -25,7 +27,10 @@ import { FilterPipe } from "./cart/pipe/filter.pipe";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
   ],
   providers: [CartData],
   bootstrap: [AppComponent]

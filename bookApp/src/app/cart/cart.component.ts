@@ -81,6 +81,14 @@ export class CartComponent implements OnInit{
     return bestOffer;
   }
 
+/*  getMin(items) {
+    return items.reduce((acc, val) => {
+      acc[0] = ( acc[0] === undefined || val < acc[0] ) ? val : acc[0]
+      return acc;
+    }, []);
+  }
+*/
+
 
   clearCart(){
     this.cartData.cart.splice(0, this.cartData.cart.length);
