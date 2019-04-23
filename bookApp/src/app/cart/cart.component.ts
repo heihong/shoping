@@ -11,13 +11,28 @@ import { CartData } from "../cartData/cartData";
 })
 export class CartComponent implements OnInit{
 
-  private offers;
+  private offers = [
+    {
+      "type": "percentage",
+      "value": 5
+    },
+    {
+      "type": "minus",
+      "value": 15
+    },
+    {
+      "type": "slice",
+      "sliceValue": 100,
+      "value": 12
+    }
+  ];
+
   constructor(private cartData: CartData, private offerService : OfferService){
   }
 
   ngOnInit(){
     if(this.cartData.cart.length > 0){
-      this.getOffers(this.getlistIsbn(this.cartData.cart));
+      this.cartData.offers = this.offers;
     }
 
   }
@@ -27,20 +42,20 @@ export class CartComponent implements OnInit{
     return books.reduce((acc, b) => acc + b.price, 0);
   }
 
-  getlistIsbn(books){
-    return books.map(b => b.isbn);
-  }
+  // getlistIsbn(books){
+  //   return books.map(b => b.isbn);
+  // }
 
 
-  getOffers(listIsbn){
-    this.offerService.getOffer(listIsbn).subscribe((data)=>{
-      this.cartData.offers= data['offers'];
-    })
-  }
+  // getOffers(listIsbn){
+  //   this.offerService.getOffer(listIsbn).subscribe((data)=>{
+  //     this.cartData.offers= data['offers'];
+  //   })
+  // }
 
   removeToCart(index){
     this.cartData.cart.splice(index, 1);
-    this.getOffers(this.getlistIsbn(this.cartData.cart));
+    // this.getOffers(this.getlistIsbn(this.cartData.cart));
   }
 
   getBestOffer(bestOffer, resultCalcul, index){
@@ -56,6 +71,36 @@ export class CartComponent implements OnInit{
     return bestOffer;
   }
 
+
+  getResultOffers(offers){
+    let resultOffers = [];
+    let result = {calcul:-1,
+                  type : ''
+    };
+    for (let i = 0; i < offers.length; i++) {
+      switch (offers[i].type) {
+        case 'percentage':
+          result.calcul = this.offerService.calculPercentage(this.total(this.cartData.cart), offers[i].value);
+          break;
+        case 'minus':
+          result.calcul = this.offerService.calculMinus(this.total(this.cartData.cart), offers[i].value);
+          break;
+        case 'slice':
+          result.calcul = this.offerService.calculSlide(this.total(this.cartData.cart), offers[i].value, offers[i].sliceValue);
+          break;
+
+      }
+      result.type = offers[i].type;
+      resultOffers.push(result);
+    }
+  }
+
+  getMin(resultOffers){
+    return resultOffers.reduce((acc, val) => {
+      acc.calcul = ( acc.calcul === undefined || val.calcul < acc.calcul ) ? val.calcul : acc.calcul;
+      return acc;
+    }, []);
+  }
 
   bestOfferCart(offers){
     let bestOffer = {
@@ -80,6 +125,14 @@ export class CartComponent implements OnInit{
     }
     return bestOffer;
   }
+
+/*  getMin(items) {
+    return items.reduce((acc, val) => {
+      acc[0] = ( acc[0] === undefined || val < acc[0] ) ? val : acc[0]
+      return acc;
+    }, []);
+  }
+*/
 
 
   clearCart(){
