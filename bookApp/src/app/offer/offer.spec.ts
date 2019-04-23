@@ -1,47 +1,20 @@
 import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-
-//component
-import { AppComponent } from '../app.component';
-import {BooksComponent} from "../books/books.component";
-import {BookComponent} from "../book/book.component";
 
 //service
 import {OfferService} from "./offer.service";
-import {FormsModule} from "@angular/forms";
-import {FilterPipe} from "../cart/pipe/filter.pipe";
 
 
 
 describe('OfferService', () => {
 
   let service : OfferService;
-  let httpMock : HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        HttpClientTestingModule,
-        FormsModule
-      ],
-      declarations: [
-        AppComponent,
-        BooksComponent,
-        BookComponent,
-        FilterPipe
-      ],
       providers: [OfferService]
     });
-
     service = TestBed.get(OfferService);
-    httpMock = TestBed.get(HttpTestingController);
   });
-
-  afterEach(()=>{
-    httpMock.verify();
-  })
   // offer 1
 
   let offers1 = [
