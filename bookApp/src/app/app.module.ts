@@ -12,7 +12,7 @@ import { CartComponent } from "./cart/cart.component";
 import { CartData } from "./cartData/cartData";
 import { BookComponent } from "./book/book.component";
 import { FilterPipe } from "./cart/pipe/filter.pipe";
-import {InMemoryDataService} from "./memoryData/InMemoryDataService";
+import {InMemoryBooksService} from "./memoryData/InMemoryBooksService";
 
 
 @NgModule({
@@ -29,7 +29,7 @@ import {InMemoryDataService} from "./memoryData/InMemoryDataService";
     HttpClientModule,
     FormsModule,
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
+      InMemoryBooksService, { dataEncapsulation: false },
     )
   ],
   providers: [CartData],

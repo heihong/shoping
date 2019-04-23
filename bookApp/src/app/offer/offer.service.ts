@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class OfferService {
 
-  constructor(private http: HttpClient) { }
-
-  getOffer(booksIsbn) {
-    return this.http.get(`http://henri-potier.xebia.fr/books/${booksIsbn.join(',')}/commercialOffers`)
-  }
+  constructor() {}
 
   calculMinus(total, value){
     return total - value;
