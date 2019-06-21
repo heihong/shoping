@@ -5,20 +5,14 @@
 <div *ngIf="cartData.cart.length > 0">
   <button (click)="clearCart()" class="btn btn-primary">clear cart</button>
   <div>
-    Total : <span>{{bestOfferCart(cartData.offers).min}}€</span> <span class="line margin-left">{{total(this.cartData.cart)}}€</span>
+    Total : <span>{{bestOffer.calcul}}€</span> <span class="line margin-left">{{totalCart}}€</span>
   </div>
 
-  <div *ngIf="bestOfferCart(cartData.offers).index !=-1 && cartData.offers[bestOfferCart(cartData.offers).index].type == 'percentage' ">
-    Discount : {{textPercentage()}}
+  <div>
+    Discount : {{textDiscount}}
   </div>
-
-  <div *ngIf="bestOfferCart(cartData.offers).index !=-1 && cartData.offers[bestOfferCart(cartData.offers).index].type == 'minus' ">
-    Discount : {{textMinus()}}
-  </div>
-
-  <div *ngIf="bestOfferCart(cartData.offers).index !=-1 && cartData.offers[bestOfferCart(cartData.offers).index].type == 'slice' ">
-    Discount : {{textSlice()}}
-  </div>
+  
+  
   <div class="row align">
     <div *ngFor="let product of cartData.cart, let i = index" [attr.data-index]="i" class="margin">
       <app-book [book]="product" (eventButton) = "removeToCart(i)" nameButton = "remove from cart"></app-book>

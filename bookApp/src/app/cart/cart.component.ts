@@ -26,6 +26,11 @@ export class CartComponent implements OnInit{
       "value": 12
     }
   ];
+  
+  private totalCart;
+  private resultOffers;
+  private bestOffer;
+  private textDiscount;
 
   constructor(private cartData: CartData, private offerService : OfferService){
   }
@@ -34,7 +39,15 @@ export class CartComponent implements OnInit{
     if(this.cartData.cart.length > 0){
       this.cartData.offers = this.offers;
     }
-
+			
+	this.updateData();
+  }
+  
+  updateData(){
+	  this.totalCart = this.total(this.cartData.cart);
+	  this.resultOffers = this.getResultOffers(this.offers);
+	  this.bestOffer = this.getMin(this.resultOffers);
+	  this.textDiscount = this.getTextDiscount(this.bestOffer.type);
   }
 
 
@@ -56,6 +69,7 @@ export class CartComponent implements OnInit{
   removeToCart(index){
     this.cartData.cart.splice(index, 1);
     // this.getOffers(this.getlistIsbn(this.cartData.cart));
+	this.updateData();
   }
 
   getBestOffer(bestOffer, resultCalcul, index){
@@ -80,7 +94,7 @@ export class CartComponent implements OnInit{
     for (let i = 0; i < offers.length; i++) {
       switch (offers[i].type) {
         case 'percentage':
-          result.calcul = this.offerService.calculPercentage(this.total(this.cartData.cart), offers[i].value);
+          result.calcul = this.offerService.calculPercentage(this.totalCart, offers[i].value);
           break;
         case 'minus':
           result.calcul = this.offerService.calculMinus(this.total(this.cartData.cart), offers[i].value);
@@ -91,16 +105,22 @@ export class CartComponent implements OnInit{
 
       }
       result.type = offers[i].type;
-      resultOffers.push(result);
+	  let resultCopy = Object.assign({}, result);
+      resultOffers.push(resultCopy);
     }
+	return resultOffers;
   }
 
   getMin(resultOffers){
     return resultOffers.reduce((acc, val) => {
-      acc.calcul = ( acc.calcul === undefined || val.calcul < acc.calcul ) ? val.calcul : acc.calcul;
+		if(acc.calcul === undefined || val.calcul < acc.calcul){
+			acc.calcul = val.calcul;
+			acc.type = val.type;
+		}
       return acc;
     }, []);
   }
+ 
 
   bestOfferCart(offers){
     let bestOffer = {
@@ -134,20 +154,37 @@ export class CartComponent implements OnInit{
   }
 */
 
-
   clearCart(){
     this.cartData.cart.splice(0, this.cartData.cart.length);
   }
 
-  textPercentage(){
-    return `-${this.cartData.offers[this.bestOfferCart(this.cartData.offers).index].value}%`;
+  textPercentage(value){
+    return `-${value}%`;
   }
 
-  textMinus(){
-    return `-${this.cartData.offers[this.bestOfferCart(this.cartData.offers).index].value}`;
+  textMinus(value){
+    return `-${value}`;
   }
 
-  textSlice(){
-    return `-${this.cartData.offers[this.bestOfferCart(this.cartData.offers).index].value} for each ${this.cartData.offers[this.bestOfferCart(this.cartData.offers).index].sliceValue}`;
+  textSlice(value, sliceValue){
+    return `-${value} for each ${sliceValue}`;
   }
+  
+  getTextDiscount(type){
+	 let bestOffer = this.offers.filter(el => el.type == type);
+
+	 switch (bestOffer[0].type) {
+          case 'percentage':
+            return this.textPercentage(bestOffer[0].value);
+            break;
+          case 'minus':
+           return this.textMinus(bestOffer[0].value);
+            break;
+          case 'slice':
+            return this.textSlice(bestOffer[0].value, bestOffer[0].sliceValue);
+            break;
+
+        }
+  }	  
+
 }
