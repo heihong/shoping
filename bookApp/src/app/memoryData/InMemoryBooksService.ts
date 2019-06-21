@@ -7,7 +7,7 @@ import {Book} from "../models/book.model";
 })
 export class InMemoryBooksService implements InMemoryDbService {
 
-  createDb() {
+  createDb() : {} {
     const books :Book[] = [
       {
         "isbn": "c8fabf68-8374-48fe-a7ea-a00ccd07afff",

@@ -1,9 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import {Book} from "../../models/book.model";
 @Pipe({
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
-  transform(books: any[], searchText: string): any[] {
+  transform(books: Book[], searchText: string): Book[] {
     if(!books){
       return [];
     }

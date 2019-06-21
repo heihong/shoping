@@ -5,15 +5,15 @@ export class OfferService {
 
   constructor() {}
 
-  calculMinus(total, value){
+  calculMinus(total, value) : number{
     return total - value;
   }
 
-  calculPercentage(total, value){
+  calculPercentage(total, value) :number {
     return total - (total * value/100);
   }
 
-  calculSlide(total, value, sliceValue){
+  calculSlide(total, value, sliceValue) : number {
     let sliceNumber =  Math.trunc(total/ sliceValue);
     return  total - value * sliceNumber;
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OfferService} from "../offer/offer.service";
 
 import { CartData } from "../cartData/cartData";
+import {resultOffer} from "../models/resultOffer.model";
 
 @Component({
   selector: 'app-cart',
@@ -9,25 +10,28 @@ import { CartData } from "../cartData/cartData";
   providers: [OfferService],
   styleUrls: ['./cart.component.css']
 })
+
+
+
 export class CartComponent implements OnInit{
 
   private offers = [
     {
-      "type": "percentage",
-      "value": 5
+      type: 'percentage',
+      value: 5
     },
     {
-      "type": "minus",
-      "value": 15
+      type: 'minus',
+      value: 15
     },
     {
-      "type": "slice",
-      "sliceValue": 100,
-      "value": 12
+      type: 'slice',
+      sliceValue: 100,
+      value: 12
     }
   ];
   
-  private totalCart;
+  private totalCart :number;
   private resultOffers;
   private bestOffer;
   private textDiscount;
@@ -39,7 +43,7 @@ export class CartComponent implements OnInit{
     this.updateData();
   }
   
-  updateData(){
+  updateData() : void {
 	  this.totalCart = this.total(this.cartData.cart);
 	  this.resultOffers = this.getResultOffers(this.offers);
 	  this.bestOffer = this.getBestOffer(this.resultOffers);
@@ -47,18 +51,18 @@ export class CartComponent implements OnInit{
   }
 
 
-  total(books){
+  total(books) :number {
     return books.reduce((acc, b) => acc + b.price, 0);
   }
 
-  removeToCart(index){
+  removeToCart(index) :void {
     this.cartData.cart.splice(index, 1);
     // this.getOffers(this.getlistIsbn(this.cartData.cart));
 	  this.updateData();
   }
 
 
-  getResultOffers(offers){
+  getResultOffers(offers) : resultOffer[]{
     let resultOffers = [];
     let result = {calcul:-1,
                   type : ''
@@ -83,7 +87,7 @@ export class CartComponent implements OnInit{
 	  return resultOffers;
   }
 
-  getBestOffer(resultOffers){
+  getBestOffer(resultOffers) : resultOffer {
     return resultOffers.reduce((acc, val) => {
 		if(acc.calcul === undefined || val.calcul < acc.calcul){
 			acc.calcul = val.calcul;
@@ -94,23 +98,23 @@ export class CartComponent implements OnInit{
   }
 
 
-  clearCart(){
+  clearCart() : void {
     this.cartData.cart.splice(0, this.cartData.cart.length);
   }
 
-  textPercentage(value){
+  textPercentage(value) :String {
     return `-${value}%`;
   }
 
-  textMinus(value){
+  textMinus(value) :String {
     return `-${value}`;
   }
 
-  textSlice(value, sliceValue){
+  textSlice(value, sliceValue) :String{
     return `-${value} for each ${sliceValue}`;
   }
   
-  getTextDiscount(type){
+  getTextDiscount(type) :String {
 	 let bestOffer = this.offers.filter(el => el.type == type);
 
 	 switch (bestOffer[0].type) {

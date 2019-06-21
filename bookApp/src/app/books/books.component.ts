@@ -2,6 +2,7 @@ import { Component , OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BooksService } from './books.service';
 import { CartData } from "../cartData/cartData";
+import {Book} from "../models/book.model";
 
 @Component({
   selector: 'app-books',
@@ -14,7 +15,7 @@ export class BooksComponent implements OnInit{
 
   }
 
-  private books : Object;
+  private books : Book[];
 
   ngOnInit(){
     this.booksService.getBooks()
@@ -23,7 +24,7 @@ export class BooksComponent implements OnInit{
       );
   }
 
-  addToCart(book) {
+  addToCart(book): void {
     this.cartData.cart.push(book);
   }
 
