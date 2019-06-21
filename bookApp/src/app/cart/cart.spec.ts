@@ -67,63 +67,10 @@ describe('CartComponent', () => {
     }
   ];
 
-
-
-  it('should return total', ()  =>{
-    expect(cartComponentInstance.total(books)).toEqual(65);
-  })
-
-  xit('should return a list of isbn', ()  =>{
-    let listISbn = ['c8fabf68-8374-48fe-a7ea-a00ccd07afff', 'a460afed-e5e7-4e39-a39d-c885c05db861'];
-    expect(cartComponentInstance.getlistIsbn(books)).toEqual(listISbn);
-  })
-
-
-  it('should return the bestOffer', ()  =>{
-
-    // calculation percentage 65 * 5%
-    let resulCalcul = 61.75;
-
-    let bestOffer = {
-      min : -1,
-      index : -1
-    };
-
-    let resultbestOffer = {
-      min : 61.75,
-      index : 0
-    };
-
-    let indexCourant = 0;
-
-    expect(cartComponentInstance.getBestOffer(bestOffer, resulCalcul, indexCourant)).toEqual(resultbestOffer);
-  })
-
-  it('should return the bestOffer', ()  =>{
-    // calculation minus 65 - 15
-    let resultCalcul = 50;
-
-    let bestOffer = {
-      min : 61.75,
-      index : 0
-    };
-
-    let resultbestOffer = {
-      min: 50,
-      index :1
-    }
-
-    let indexCourant = 1;
-
-    expect(cartComponentInstance.getBestOffer(bestOffer, resultCalcul , indexCourant)).toEqual(resultbestOffer);
-  })
-
-  // offer 1
-
-  let offers1 = [
+  let offers = [
     {
       "type": "percentage",
-      "value": 4
+      "value": 5
     },
     {
       "type": "minus",
@@ -137,107 +84,73 @@ describe('CartComponent', () => {
   ];
 
 
-  it('should return the best offer for the cart with offer1', ()  =>{
-    let resulBestOffer = {
-      min : 50,
-      index : 1
-    };
-    cartData.cart = books;
-    expect(cartComponentInstance.bestOfferCart(offers1)).toEqual(resulBestOffer);
+
+  it('should return total', ()  =>{
+    expect(cartComponentInstance.total(books)).toEqual(65);
   })
 
-
-
-  let offers2 = [
-    {
-      "type": "percentage",
-      "value": 30
-    },
-    {
-      "type": "minus",
-      "value": 15
-    },
-    {
-      "type": "slice",
-      "sliceValue": 80,
-      "value": 14
-    }
-  ];
-
-  it('should return the best offer for the cart with offer2', ()  =>{
-    let resulBestOffer = {
-      min : 45.5,
-      index : 0
-    };
-    cartData.cart = books;
-    expect(cartComponentInstance.bestOfferCart(offers2)).toEqual(resulBestOffer);
+  it('should remove one element', ()  =>{
+    let result = [{
+      "isbn": "a460afed-e5e7-4e39-a39d-c885c05db861",
+      "title": "Henri Potier et la Chambre des secrets",
+      "price": 30,
+      "cover": "http://henri-potier.xebia.fr/hp1.jpg",
+      "synopsis": [
+        "Henri Potier passe l'été chez les Dursley et reçoit la visite de Dobby, un elfe de maison. Celui-ci vient l'avertir que des évènements étranges vont bientôt se produire à Poudlard et lui conseille donc vivement de ne pas y retourner. Henri choisit d'ignorer cet avertissement. Le jour de son départ pour l'école, il se retrouve bloqué avec Ron Weasley à la gare de King's Cross, sans pouvoir se rendre sur le quai 9 ¾ où les attend le Poudlard Express. En dernier recours, les garçons se rendent donc à Poudlard à l'aide de la voiture volante de Monsieur Weasley et manquent de peu de se faire renvoyer dès leur arrivée à l'école pour avoir été aperçus au cours de leur voyage par plusieurs moldus.",
+        "Le nouveau professeur de défense contre les forces du mal, Gilderoy Lockhart, se montre particulièrement narcissique et inefficace. Pendant ce temps, Henri entend une voix étrange en parcourant les couloirs du château, systématiquement associée à la pétrification immédiate d'un élève moldu de l'école. Dès la première attaque, un message sanglant apparaît sur l'un des murs, informant que la Chambre des secrets a été ouverte. Dumbledore et les autres professeurs (ainsi que Henri, Ron et Hermione) doivent prendre les mesures nécessaires pour trouver l'identité du coupable et protéger les élèves contre de nouvelles agressions."
+      ]
+    }];
+    cartComponentInstance.cartData.cart = books;
+    cartComponentInstance.removeToCart(0);
+    expect(cartComponentInstance.cartData.cart.length).toEqual(1);
+    expect(cartComponentInstance.cartData.cart).toEqual(result);
   })
 
+  it('should return the result for each offer', ()  =>{
+    cartComponentInstance.totalCart = 65;
+    let result = [{calcul : 61.75 , type :'percentage'},
+                  {calcul : 50 , type :'minus'},
+                  {calcul : 65 , type :'slice'}];
 
-  it('should clear the cart', ()  =>{
-    cartData.cart = books;
-    cartComponentInstance.clearCart()
-    expect(cartData.cart.length).toEqual(0);
+    expect(cartComponentInstance.getResultOffers(offers)).toEqual(result);
+  })
+
+  it('should return the best offer', ()  =>{
+    let resultOffer = [{calcul : 61.75 , type :'percentage'},
+      {calcul : 50 , type :'minus'},
+      {calcul : 65 , type :'slice'}];
+    let result =  { calcul: 50, type: 'minus' };
+    expect(cartComponentInstance.getBestOffer(resultOffer)).toEqual(result);
+  })
+
+  it('should clean the cart', ()  =>{
+    cartComponentInstance.cartData.cart = books;
+    cartComponentInstance.clearCart();
+    expect(cartComponentInstance.cartData.cart.length).toEqual(0);
+  })
+
+  it('should return -5%', ()  =>{
+    expect(cartComponentInstance.textPercentage(5)).toEqual('-5%');
+  })
+
+  it('should return -5', ()  =>{
+    expect(cartComponentInstance.textMinus(5)).toEqual('-5');
+  })
+
+  it('should return -5 for each 100', ()  =>{
+    expect(cartComponentInstance.textSlice(5, 100)).toEqual('-5 for each 100');
+  })
+
+  it('should return -5%', ()  =>{
+    expect(cartComponentInstance.getTextDiscount('percentage')).toEqual('-5%');
   })
 
   it('should return -15', ()  =>{
-    cartData.offers = offers1;
-    cartData.cart = books;
-    expect(cartComponentInstance.textMinus()).toEqual('-15');
+    expect(cartComponentInstance.getTextDiscount('minus')).toEqual('-15');
   })
 
-
-  let offers3 = [
-    {
-      "type": "percentage",
-      "value": 4
-    }
-  ];
-
-  it('should return -4%', ()  =>{
-    cartData.offers = offers3;
-    cartData.cart = books;
-    expect(cartComponentInstance.textPercentage()).toEqual('-4%');
+  it('should return -12 for each 100', ()  =>{
+    expect(cartComponentInstance.getTextDiscount('slice')).toEqual('-12 for each 100');
   })
-
-
-
-  let offers4 = [
-    {
-      "type": "slice",
-      "sliceValue": 80,
-      "value": 14
-    }
-  ];
-
-  it('should return -14 for each 80', ()  =>{
-    cartData.offers = offers4;
-    cartData.cart = books;
-    expect(cartComponentInstance.textSlice()).toEqual('-14 for each 80');
-  })
-
-  it('should remove a book to cart', ()  =>{
-    cartData.cart = [
-      {
-        "isbn": "c8fabf68-8374-48fe-a7ea-a00ccd07afff",
-        "title": "Henri Potier à l'école des sorciers",
-        "price": 35,
-        "cover": "http://henri-potier.xebia.fr/hp0.jpg",
-        "synopsis": [
-          "Après la mort de ses parents"
-        ]
-      },
-      {
-        "isbn": "a460afed-e5e7-4e39-a39d-c885c05db861",
-        "title": "Henri Potier et la Chambre des secrets",
-        "price": 30,
-        "cover": "http://henri-potier.xebia.fr/hp1.jpg",
-        "synopsis": [
-          "Henri Potier passe l'été chez les Dursley et reçoit la visite de Dobby, un elfe de maison."
-        ]
-      }];
-    cartComponentInstance.removeToCart(1);
-    expect(cartData.cart.length).toEqual(1);
-  });
 
 });
