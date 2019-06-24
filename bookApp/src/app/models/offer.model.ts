@@ -1,13 +1,5 @@
-interface offer {
+export interface Offer {
   value : number;
   type : string;
+  sliceValue? : number;
 }
-
-interface offerSile{
-  value : number;
-  type : string;
-  sliceValue : number;
-}
-
-export type offerType = offerSile | offer;
-

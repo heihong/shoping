@@ -3,6 +3,7 @@ import { OfferService} from "../offer/offer.service";
 
 import { CartData } from "../cartData/cartData";
 import {resultOffer} from "../models/resultOffer.model";
+import {Offer} from "../models/offer.model";
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,7 @@ import {resultOffer} from "../models/resultOffer.model";
 
 export class CartComponent implements OnInit{
 
-  private offers = [
+  private offers : Offer = [
     {
       type: 'percentage',
       value: 5
