@@ -16,7 +16,7 @@ import {Offer} from "../models/offer.model";
 
 export class CartComponent implements OnInit{
 
-  private offers : Offer = [
+  private offers : Offer[] = [
     {
       type: 'percentage',
       value: 5
@@ -31,7 +31,7 @@ export class CartComponent implements OnInit{
       value: 12
     }
   ];
-  
+
   private totalCart :number;
   private resultOffers;
   private bestOffer;
@@ -43,7 +43,7 @@ export class CartComponent implements OnInit{
   ngOnInit(){
     this.updateData();
   }
-  
+
   updateData() : void {
 	  this.totalCart = this.total(this.cartData.cart);
 	  this.resultOffers = this.getResultOffers(this.offers);
@@ -114,7 +114,7 @@ export class CartComponent implements OnInit{
   textSlice(value, sliceValue) :String{
     return `-${value} for each ${sliceValue}`;
   }
-  
+
   getTextDiscount(type) :String {
 	 let bestOffer = this.offers.filter(el => el.type == type);
 
@@ -130,6 +130,6 @@ export class CartComponent implements OnInit{
 
 
         }
-  }	  
+  }
 
 }
